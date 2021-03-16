@@ -1,0 +1,650 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Communicating With An Android App Over USB | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Communicating With An Android App Over USB</h2>
+                <h4>26 December 2019</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>About the motivation you may read in the previous parts of this series. Now it is the time to get finally my hands dirty! :)</p>
+
+<h1 id="an-approach-with-ipc-sockets">An approach with IPC sockets</h1>
+
+<p>After doing a quick research it turned out for me that one of the main SDK tools for Android Development, <a href="https://en.droidwiki.org/wiki/Android_Debug_Bridge">ADB</a> does support forwarding data over UNIX IPC Sockets in a similar way <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> is capable to.</p>
+
+<h2 id="a-little-refresh-on-sockets">A little refresh on sockets</h2>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Network_socket">socket</a> is a logical abstraction of an endpoint for receiving or sending data. Put it another way, it is “something that we are able to receive or send data through”. (there is usually a “something” involved in an abstraction, because it does not limit what that “something” can be)</p>
+
+<p>The concept of sockets is used most of the time to encapsulate the details of a network connection. For example, if I wanted to connect to IP 1.2.3.4 on port 8099 to send data, then, the result of a successful connection would be a socket. You may think about it as a “portal to the other side”. After the connection is made, we no longer care about what IP and what port (or wherever in general) it redirects the data to. All we care about is that this “something” connects us with some other side, and that we can read from it and write to it.</p>
+
+<p>Being an abstract concept, nobody forbids us to encapsulate other entities into sockets in various programming languages. Roughly speaking, a <a href="https://en.wikipedia.org/wiki/Unix_domain_socket">UNIX IPC socket</a> is another kind of implementation. One can send and receive data through it quite the same way like through a network socket, however, the data gets exchanged differently.</p>
+
+<p>In a <a href="https://en.wikipedia.org/wiki/Network_socket">POSIX</a>-compatible operating system a UNIX socket usually appears as a file. Processes can connect to files of this kind and can “communicate” with them. These files are, however, only sort of pointers. What actually connects the two parties - the two processes at the two sides - is the system kernel. It keeps track of which files are marked as sockets and which processes are using them. (recently, <a href="https://devblogs.microsoft.com/commandline/af_UNIX-comes-to-windows/">Windows 10 began supporting these kind of sockets as well</a>)</p>
+
+<p>As UNIX sockets are represented with files, they have the advantage, that they can be guarded the way regular files are: by setting permissions on them. By contrast, if we used a TCP or UDP port, then it could be seen and could be abused by any of our local programs on our machine - or on our phone, if we open a port on the phone - which is a security concern right from the beginning.</p>
+
+<h2 id="adb-socket-forwarding">ADB socket forwarding</h2>
+
+<p>If I wanted to communicate with an app on my phone, I would let it create a socket in a place where <code class="highlighter-rouge">adb</code> can access it, and thus act as a server. Then, I would ask <code class="highlighter-rouge">adb</code> to create another socket on my computer. Now if I tried to read from the socket on the computer, <code class="highlighter-rouge">adb</code> would be the other party to answer my request. <code class="highlighter-rouge">adb</code> would then read from the socket of the app and forward the response. Writing to the sockets would work similarly.</p>
+
+<p><img src="/assets/img/2019-12-26-communicating-with-an-android-app-over-usb/adb.png" alt="adb diagram" /></p>
+
+<p>Notice that, as mentioned recently, a UNIX socket is only eligible for inter-process communication (IPC) - with other words, it does not use a network connection. The communication happens instead “in house”, between processes. By forwarding the traffic, <code class="highlighter-rouge">adb</code> managed to create another socket on the other side, that behaves in a way like if the original one was copied from the phone to the computer with the connection still alive.</p>
+
+<p>Otherwise, if simply copying the socket from the phone to the computer could retain the connection on its own (which is “in house” inter-process only!) , that would be probably an alerting sign that our reality just stopped making sense. Sorry, there is an XKCD for absolutely everything :)</p>
+
+<div class="xkcd-wrapper">
+    <p>
+        <a href="https://xkcd.com/1293">
+            <img src="https://imgs.xkcd.com/comics/job_interview.png" alt="xkcd: Job Interview" title="When you talk about the job experience you'll give me, why do you pronounce 'job' with a long 'o'?" />
+            <div class="caption">
+                xkcd no. 1293: Job Interview
+            </div>
+        </a>
+    </p>
+
+</div>
+
+<h2 id="lets-see-how-it-works-on-the-machine-first">Let’s see how it works on the machine first…</h2>
+
+<p>I created a small server and client example application. Upon an incoming connection, the server sends a string with the current time to the client, and then shuts down the socket. The client reads one message and then closes the connection.</p>
+
+<blockquote>
+  <p>Note that I’m using <code class="highlighter-rouge">libsocket</code> for creating sockets and <code class="highlighter-rouge">sds</code> library for handling strings, both for easier readability.</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">server.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...</span>
+
+<span class="kt">int</span> <span class="n">socketd</span> <span class="o">=</span> <span class="n">create_UNIX_server_socket</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">LIBSOCKET_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// (error check omitted)</span>
+    
+<span class="n">sds</span> <span class="n">sendbuf</span> <span class="o">=</span> <span class="n">sdsempty</span><span class="p">();</span>
+
+<span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Waiting for new connection...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    
+    <span class="kt">int</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">accept_UNIX_stream_socket</span><span class="p">(</span><span class="n">socketd</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="c1">// (error check omitted)</span>
+
+    <span class="n">sendbuf</span> <span class="o">=</span> <span class="n">construct_message</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">);</span> <span class="c1">// puts time into the buffer</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Answering call with message: %s (length: %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">));</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="n">sdslen</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hang up</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">destroy_UNIX_socket</span><span class="p">(</span><span class="n">connection</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">sdsfree</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">client.c</code>:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...</span>
+
+<span class="kt">int</span> <span class="n">socketd</span> <span class="o">=</span> <span class="n">create_UNIX_stream_socket</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// (error check omitted)</span>
+
+<span class="kt">size_t</span> <span class="n">buf_len</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">buf_len</span><span class="p">];</span>    
+<span class="n">read</span><span class="p">(</span><span class="n">socketfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">buf_len</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Got message: %s"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+<span class="n">shutdown_UNIX_stream_socket</span><span class="p">(</span><span class="n">socketd</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</code></pre></div></div>
+
+<h3 id="test-run">Test run</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./server test_socket
+Waiting for new connection...
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./client test_socket 
+Got message: Local time is: 2019-12-26 10:09:33
+$
+</code></pre></div></div>
+
+<p>After running the client, the server gave us some additional output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./server test_socket
+Waiting for new connection...
+Answering call with message: Local time is: 2019-12-26 10:09:33
+ (length: 35)
+Hang up
+Waiting for new connection...
+
+</code></pre></div></div>
+
+<h2 id="so-far-it-works">So far it works!</h2>
+
+<p>In addition, at this point, we already have a program that we can use to test <code class="highlighter-rouge">adb</code> socket forwarding with.</p>
+
+<p>Let’s compile this program for Android. For this I need to have the Android NDK downloaded which is the toolkit for creating native executables for Android.</p>
+
+<p>These can be downloaded in Android Studio:</p>
+
+<p><img src="/assets/img/2019-12-26-communicating-with-an-android-app-over-usb/ndk_in_android_studio.png" alt="Installing NDK in Android Studio" /></p>
+
+<p>I’m also using CMake for my project, which means I can easily write a new toolkit and compile against it:</p>
+
+<p><code class="highlighter-rouge">armv7a-linux-androideabi24.toolchain</code>:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span>CMAKE_SYSTEM_NAME Linux<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_SYSTEM_PROCESSOR arm<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_C_COMPILER /opt/kuklinistvan/android-sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi24-clang<span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span>CMAKE_C_COMPILER_TARGET armv7a-linux-androideabi24<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm CMakeCache.txt
+$ cmake -DCMAKE_TOOLCHAIN_FILE=armv7a-linux-androideabi24.toolchain .
+(...)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: (...)
+$ make
+(...)
+[ 55%] Built target server
+(...)
+[100%] Built target client
+</code></pre></div></div>
+
+<p>Great! Note that I cannot run this executable as it is compiled for ARM processor.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./client
+zsh: Érvénytelen végrehajtható fájlformátum: ./client
+$
+</code></pre></div></div>
+
+<p>(it says “invalid executable file format” in Hungarian)</p>
+
+<p>Let me hook up my phone. Will it blend?</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ adb push server /data/local/tmp
+server: 1 file pushed. 2.2 MB/s (70268 bytes in 0.031s)
+$ adb shell
+mido:/ $ cd /data/local/tmp
+mido:/data/local/tmp $ ./server                                                
+Usage: ./server &lt;socket_path&gt;
+1|mido:/data/local/tmp $ 
+</code></pre></div></div>
+
+<p>Yay! I can run it!</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mido:/data/local/tmp $ ./server test_socket                                    
+Failed to bind to socket at test_socket.
+1|mido:/data/local/tmp $ ./server /sdcard/test_socket                          
+Failed to bind to socket at /sdcard/test_socket.
+1|mido:/data/local/tmp $ ./server /storage/FC30-3DA9/test_socket               
+Failed to bind to socket at /storage/FC30-3DA9/test_socket.
+1|mido:/data/local/tmp $ ./server /storage/self/primary/test_socket
+Failed to bind to socket at /storage/self/primary/test_socket.
+1|mido:/data/local/tmp $ ./server /storage/emulated/test_socket                
+Failed to bind to socket at /storage/emulated/test_socket.
+1|mido:/data/local/tmp $ 
+</code></pre></div></div>
+
+<p>No good! Android does not let me create a UNIX Socket. Well, then, uhh…</p>
+
+<p>take 2!</p>
+
+<h1 id="an-approach-with-unix-sockets-in-the-abstract-namespace">An approach with UNIX sockets in the abstract namespace</h1>
+
+<p>There is an alternative solution to create a UNIX socket. Even if we cannot map it to an entity on the file system, we are still able to create it in the abstract namespace.</p>
+
+<p>In fact, Android does provide an API for the latter, called <a href="https://developer.android.com/reference/android/net/LocalSocket">LocalServerSocket</a>.</p>
+
+<p>Creating a socket in the abstract namespace pretty much means we can name it however we want. Not using a file for representing our socket, however, comes with a serious disadvantage: it is just as unguarded  as a TCP port number.</p>
+
+<p>But hey! At least it works! Here is the relevant part of the Android application:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...</span>
+
+<span class="c1">// The name is specified in the constructor</span>
+<span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalServerSocket</span><span class="o">(</span><span class="s">"com.codekuklin.UNIX_socket_time_applet.time_applet"</span><span class="o">);</span>
+
+<span class="c1">// It is not only sensible but also strictly required by the API</span>
+<span class="c1">// that the network function does not block the main thread</span>
+<span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span> 
+    <span class="k">for</span><span class="o">(;;)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">LocalSocket</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+            <span class="nc">BufferedWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedWriter</span><span class="o">(</span><span class="k">new</span> <span class="nc">OutputStreamWriter</span><span class="o">(</span><span class="n">connection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">()));</span>
+
+            <span class="nc">String</span> <span class="n">currentTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleDateFormat</span><span class="o">(</span><span class="s">"YYYY-MM-dd HH:mm:ss"</span><span class="o">,</span> <span class="nc">Locale</span><span class="o">.</span><span class="na">getDefault</span><span class="o">()).</span><span class="na">format</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
+            <span class="nc">String</span> <span class="n">out</span> <span class="o">=</span> <span class="s">"Current time: "</span> <span class="o">+</span> <span class="n">currentTime</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">;</span>
+
+            <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+            <span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+
+            <span class="n">connection</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// ... handle error somehow</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+
+<span class="c1">// ...</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ adb forward localfilesystem:./test_socket localabstract:com.codekuklin.UNIX_socket_time_applet.time_applet
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+$ ls
+client  server  test_socket
+$ ./client test_socket 
+Got message: Current time: 2019-12-26 16:19:48
+$
+</code></pre></div></div>
+
+<h2 id="were-not-finished-yet">We’re not finished yet…</h2>
+
+<p>Spending a lot of time googling I did not really found a reliable solution for using file system level UNIX sockets on Android.</p>
+
+<p>The greatest problem with the solution above is that the abstract namespaced socket is at the risk of being abused by any of the apps installed on the phone.</p>
+
+<p>This socket, however, is in the wild public, and it is even very easy to find!</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>generic_x86_64:/$ cat /proc/net/UNIX | grep com                             
+0000000000000000: 00000002 00000000 00010000 0001 01 46156 @com.codekuklin.UNIX_socket_time_applet.time_applet
+</code></pre></div></div>
+
+<h2 id="well-at-least-the-pc-is-okay">Well, at least, the PC is okay?</h2>
+
+<p>At the other side of the line - on the computer - a file system guarded UNIX socket is used. I was about to write that it is somewhat more secure on the machine end, but unfortunately, there is also difference.</p>
+
+<p>On the computer we are able to gain administrative rights, whereas we cannot do that if we’re on a phone, unless it is rooted. Therefore, on Android, if an app cannot read the data of another app, and neither is <code class="highlighter-rouge">adb</code> capable of that, than that data is locked inside, at least in theory. Only the app can decide how it uses that information. This is also the property that may allow a phone to be converted into a secure encryption key storage.</p>
+
+<p>Now, on Android, in theory, not even a virus could read the locked and guarded data as it does not have permission to. In the case of the computer, we are responsible to limit the permissions of software installed, and usually most installations begin by asking you to unlock the administrative privileges. Once we said okay to an UAC warning, we are at the mercy of the executable.</p>
+
+<p><img src="/assets/img/2019-12-26-communicating-with-an-android-app-over-usb/uac_warning.png" alt="UAC Warning" /></p>
+
+<p>(I sometimes find gaining superuser rights is unnecessary anyway for a software installation. We only need create and write permissions to the <code class="highlighter-rouge">C:\Program Files\xyz</code> folder and create some registry entries.)</p>
+
+<p>That means, that having the socket endpoint guarded on a computer may help reduce the risk of security exploits of other unprivileged program, but still cannot protect us from rootkits.</p>
+
+<h2 id="there-is-hope">There is hope!</h2>
+
+<p>The problem of insecure computer networks is something we face daily. The option is still there to secure line by applying some kind of encryption, preferably matching some fingerprints before starting the operation.</p>
+
+<p>It would be interesting to figure out for next time how an encryption layer could be applied.</p>
+
+<p>Thanks for reading!</p>
+
+<div class="download-box-wrapper">
+    <div class="box">
+        <div class="texts">
+            <h3>Download</h3>
+            <a href="/attachments/2019-12-26-communicating-with-an-android-app-over-usb/android_UNIX_socket_poc.zip">
+                <p class="filename">android_UNIX_socket_poc.zip</p>
+            </a>
+            <p class="desc">Source code available</p>
+        </div>
+        <a href="/attachments/2019-12-26-communicating-with-an-android-app-over-usb/android_UNIX_socket_poc.zip">
+            <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/download-solid.svg" />
+</div>
+        </a>
+    </div>
+</div>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

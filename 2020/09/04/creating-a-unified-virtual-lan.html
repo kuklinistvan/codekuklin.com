@@ -1,0 +1,793 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Creating a Unified Virtual LAN | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Creating a Unified Virtual LAN</h2>
+                <h4>04 September 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">Linux Networking</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/08/31/on-linux-network-interfaces-and-virtual-bridges.html">Part 1: On Linux Network Interfaces and Virtual Bridges</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/09/04/creating-a-unified-virtual-lan.html">Part 2: Creating a Unified Virtual LAN</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+    
+
+    <article>
+        <blockquote>
+  <p>See the previous episode for the concept.</p>
+</blockquote>
+
+<p>Now it is the time to transform this setup:</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-start.png" /></p>
+
+<p>Into this - so that every virtual appliance can reach each other, while having an internet connection. We’re pretty much simulating a LAN network here.</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-goal.png" /></p>
+
+<h2 id="planning-the-network">Planning the network</h2>
+
+<p>In the end we will have two special networks:</p>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">virtualnet0</code> - the unified virtual LAN, the goal of this project:</p>
+
+    <ul>
+      <li>I’m going to use the subnet <code class="highlighter-rouge">172.24.0.0/16</code></li>
+      <li>I’m assigning the host the address <code class="highlighter-rouge">172.24.0.100</code>.</li>
+      <li>The default gateway of this subnet is going to sit at <code class="highlighter-rouge">172.24.0.1</code>. We will examine that in more depth later.</li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Services</th>
+          <th>Address pool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Docker containers</td>
+          <td>172.24.1.x</td>
+        </tr>
+        <tr>
+          <td>QEMU hosts</td>
+          <td>172.24.2.x</td>
+        </tr>
+        <tr>
+          <td>VirtualBox hosts</td>
+          <td>172.24.3.x</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>I’m turning DHCP off and I am going to assign all IP addresses manually.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">router_veth0 -- router_veth1</code>: a dedicated connection for the default namespace to the PAT router.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>We are going to move <code class="highlighter-rouge">enp0s25</code> from the default namespace to the PAT router’s stack. Therefore, we need a link to the router in order to keep our Internet connection.</p>
+</blockquote>
+
+<h2 id="creating-the-starting-scenario">Creating the starting scenario</h2>
+
+<h3 id="a-virtual-machines-on-vboxnet0">A virtual machines on <code class="highlighter-rouge">vboxnet0</code></h3>
+
+<p>I already have a brand new OpenSUSE Leap 15.2 installation in a virtual machine, that is suitable for testing the network that can be reached through the <code class="highlighter-rouge">vboxnet0</code> interface. The <a href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">host-only networking mode</a> of VirtualBox creates the setup that can be seen in the first figure.</p>
+
+<p><img src="/assets/img/network/bridging/virtualbox_network_config.png" /></p>
+
+<p>The IP address and the subnet mask that is being configured here is the one that is being assigned to the host interface. I’m ignoring this setting now as I am going to reconfigure the interface later manually.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ip addr show vboxnet0
+10: vboxnet0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether 0a:00:27:00:00:00 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.1/24 brd 192.168.56.255 scope global vboxnet0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::800:27ff:fe00:0/64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre></div></div>
+
+<h4 id="virtualbox-survival-tips">VirtualBox survival tips</h4>
+
+<p>I hope I’m saving you some spare hours:</p>
+
+<ul>
+  <li>It tends to reset the <code class="highlighter-rouge">vboxnet0</code> interface and reassign the IP address it thinks we need. Check it sometimes and flush it if it does so. It happens typically when you start or shut down a vm.</li>
+  <li>Sometimes packets appear in the machine, you can even see them in <code class="highlighter-rouge">tcpdump</code> output but the end application does not receive it. <em>I have no idea why it happens and spent a lot of times trying to figure out.</em> But, sometimes, if you shut down the vm, and turn it back again, flush and configure the interface again, the problem “solves” itself. If you know the reason, please email me to state it here.
+    <ul>
+      <li>For me, it always happened with bridged networking mode. You should probably stick to the host-only networking mode.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="xkcd-wrapper">
+    <p>
+        <a href="https://xkcd.com/1586">
+            <img src="https://imgs.xkcd.com/comics/keyboard_problems.png" alt="xkcd: Keyboard Problems" title="In the future, a group of resistance fighters send me back in time with instructions to find the Skynet prototype and try to upgrade it." />
+            <div class="caption">
+                xkcd no. 1586: Keyboard Problems
+            </div>
+        </a>
+    </p>
+
+</div>
+
+<ul>
+  <li>Stick to the <code class="highlighter-rouge">linux-lts</code> kernel on the host OS. It can crash the Zen kernel and other variations.</li>
+</ul>
+
+<h3 id="a-docker-container-in-an-isolated-network-segment">A Docker container in an isolated network segment</h3>
+
+<p>First I’m creating a new docker network without the built-in PAT. The first chart does not actually depict this situation exactly. With this setup, I’m essentially cutting the Internet connection - the “Virtual PAT router” part - and start from a clean state, where none of the three networks has a link to the outside world.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># docker network create --internal docker_custom
+</code></pre></div></div>
+
+<p>This command has created the bridge <code class="highlighter-rouge">br-8670eabfe12d</code>. (this bridge certainly does not know what abuses it is going to face)</p>
+
+<p>I’m starting up a container connected to that network. I’m grabbing the image <code class="highlighter-rouge">praqma/network-multitool</code> for testing. I’m leaving it now sleeping, for later access via <code class="highlighter-rouge">docker exec</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># docker run -d --name dockernet_tester  \
+	--network docker_custom --cap-add=NET_ADMIN \
+	--rm praqma/network-multitool sleep infinity
+</code></pre></div></div>
+
+<blockquote>
+  <p>Without the <code class="highlighter-rouge">--cap-add=NET_ADMIN</code> option, we won’t be able to alter the network settings from the inside.</p>
+</blockquote>
+
+<p>For now, I’m ignoring the IP address that Docker assigned for the host OS and for the container.</p>
+
+<h3 id="an-unhooked-qemu-machine">An unhooked QEMU machine</h3>
+
+<p>I’m creating a QEMU machine that provides a <a href="https://en.wikipedia.org/wiki/TUN/TAP">TAP virtual network interface</a> for the host.</p>
+
+<p>For this, I’m using a previously set up minimal Alpine installation. It has only a minimal set of tools installed such as <code class="highlighter-rouge">vim</code> and some network utilities.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># qemu-system-x86_64 \
+        -m 256 \
+        -display sdl -vga qxl \
+        -net nic -net tap,ifname=qemutap0,script=no,downscript=no \
+        -hda ./alpine.qcow2
+</code></pre></div></div>
+
+<blockquote>
+  <p>I’m running QEMU without <code class="highlighter-rouge">--enable-kvm</code>. I’m doing so because only one hypervisor is able to make use of the hardware virtualization capabilities of the host machine. I’m compensating that by utilizing a very lightweight distribution.</p>
+</blockquote>
+
+<p>The new network interface appears as expected in the host OS:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip addr set dev qemutap0 up
+# ip addr show qemutap0            
+8: qemutap0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 1000
+    link/ether f6:9c:37:be:7a:d8 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::f49c:37ff:febe:7ad8/64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre></div></div>
+
+<h2 id="creating-the-pat-router-namespace">Creating the PAT router namespace</h2>
+
+<p>This is the network namespace that is going to be responsible to connect the appliances and the host through <code class="highlighter-rouge">enp0s25</code> to the outside world.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip netns add router
+</code></pre></div></div>
+
+<h3 id="assigning-our-uplink-to-the-new-namespace">Assigning our uplink to the new namespace</h3>
+
+<blockquote>
+  <p>Be careful, as the next steps will temporarily cut your Internet connection. If you do not succeed, you may lose it “permanently”. Well, until the next reboot, because all these tweakings are ad-hoc and they won’t get applied at system boot. You may save this page for offline reading ;)</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip link set dev enp0s25 netns router
+
+## assuming that you get your IP via DHCP on your local network
+# ip netns exec router dhclient enp0s25		
+</code></pre></div></div>
+
+<h3 id="setting-up-pat">Setting up PAT</h3>
+
+<p>Now the <code class="highlighter-rouge">router</code> namespace has a usable link, however, our default namespace does not. Thus, we do not have an Internet connection right now, feel free to check it. It is time now to configure our router for network address translation.</p>
+
+<blockquote>
+  <ul>
+    <li>Prefix a command with <code class="highlighter-rouge">ip netns exec router</code> to execute it in the <code class="highlighter-rouge">router</code> namespace.</li>
+    <li>Execute <code class="highlighter-rouge">ip netns exec router bash</code> to get a shell in the namespace.</li>
+  </ul>
+</blockquote>
+
+<p>We’re applying a default-deny policy for the forwarded packets:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip netns exec router iptables -P FORWARD DROP
+</code></pre></div></div>
+
+<p>We’re enabling IP forwarding in the network namespace.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip netns exec router echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</code></pre></div></div>
+
+<blockquote>
+  <p>IP forwarding is the ability for an operating system to accept incoming network packets on one interface, recognize that it is not meant for the system itself, but that it should be passed on to another network, and then forwards it accordingly. (<a href="https://openvpn.net/faq/what-is-and-how-do-i-enable-ip-forwarding-on-linux/">ref: openvpn.net</a>)</p>
+</blockquote>
+
+<p>If we did not configure this, the incoming packets would be ignored on <code class="highlighter-rouge">router_veth1</code> interface.</p>
+
+<p>We are establishing a link (<code class="highlighter-rouge">router_veth0 -- router_veth1s</code>) to connect the default and the router namespaces. We use a VETH pair to achieve that.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip link add router_veth0 type veth peer name router_veth1
+# ip link set dev router_veth1 netns router
+
+# ip netns exec router ip addr add 10.0.22.1/30 dev router_veth1
+# ip netnes exec router ip link set dev router_veth1 up
+# ip addr add 10.0.22.2/30 dev router_veth0
+# ip link set dev router_veth0 up
+</code></pre></div></div>
+
+<p>From now on, instead of <code class="highlighter-rouge">enp0s25</code>, <code class="highlighter-rouge">router_veth0</code> is our exit to the outside network (in the default namespace). Therefore, we need to update our default gateway.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip route add default dev router_veth0 via 10.0.22.1
+</code></pre></div></div>
+
+<p>The default gateway for the PAT router is <code class="highlighter-rouge">enp0s25</code>. I like to think of it as the WAN port of the virtual router. It is configured automatically by my physical LAN network’s DHCP service, but you may add it manually.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip netns exec router ip route add default dev enp0s25 via 192.168.0.1
+</code></pre></div></div>
+
+<h4 id="configuring-pat-with-iptables-masquerade">Configuring PAT with IPTables MASQUERADE</h4>
+
+<p>This kind of NAT setup maps one IP address (the one we have on <code class="highlighter-rouge">enp0s25</code>, our network card) to many IP addresses (the virtual network’s appliances). By default, every client on the network can initiate connections to the outside world, but the outside world is only allowed to respond to existing connections.</p>
+
+<p>That is, we can request data from <code class="highlighter-rouge">google.com</code> but <code class="highlighter-rouge">google.com</code> can not initiate sending packets behind our NAT, only if it is responding to one of our requests.</p>
+
+<blockquote>
+  <p>Not only is it disallowed, the remote server would not even have an IP address in the range of its network to specify. What it can do instead, is sending the response to our public IP address, directing the answer to the appropriate source port, from where it has got our packets. Our router maps these ports dynamically to our clients and forwards packets to the appropriate one back. <a href="https://study-ccna.com/port-address-translation-pat-configuration/">You may learn more about PAT in the CCNA study guides</a>.</p>
+</blockquote>
+
+<p>We are configuring IPTables rules of the PAT router stack to achieve this exact behavior.</p>
+
+<ol>
+  <li>
+    <p>If we have no idea what to do with a particular packet, we choose the most secure option. That is, we drop it.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # ip netns exec router iptables -P FORWARD DROP
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We configure the outbound interface and ask IPTables to hide (mask) our internal IP addresses behind the public IPs. Without this step, the remote server would receive our packet with a source address valid only in our internal network. There would be no way to know where to send back the response.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # export WAN=enp0s25
+ # ip netns exec router iptables -t nat -A POSTROUTING -o $WAN -j MASQUERADE
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We allow the clients to initiate traffic from the inside, and allow the outside world to respond to existing connections.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # export WAN=enp0s25 LAN=router_veth1
+ # ip netns exec router \
+     iptables -A FORWARD -i $LAN -o $WAN -j ACCEPT
+ # ip netns exec router \
+     iptables -A FORWARD -o $LAN -i $WAN -m state --state RELATED,ESTABLISHED -j ACCEPT
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>To enable the outside world (everything which is past our network card) to initiate connections to our servers runnning on the host machine, we either have to apply port forwarding with IPTables one-by-one, or choose a special interface to forward the packets to by default.</p>
+
+      <p>Our virtual network setup works similarly to a plain old regular LAN network, where you have to configure the router explicitly to allow external connections getting in.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h2 id="connecting-the-network-segments">Connecting the network segments</h2>
+
+<p>Now, that we have a working router stack, we are creating a new virtual bridge, combining and connecting all our virtual appliances to it, as well as our host. We are going to connect the router to it too, to provide a gateway to the Internet.</p>
+
+<p>First, we create the virtual bridge with the interface <code class="highlighter-rouge">virtualnet0</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip link add name virtualnet0 type bridge
+# ip link set virtualnet0 up
+</code></pre></div></div>
+
+<p>Then I set the host OS IP:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip addr add 172.24.0.100/16 dev virtualnet0
+</code></pre></div></div>
+
+<p>Now it is time to plug everything together according to the second chart. First, we plug in the virtual interfaces of QEMU and VirtualBox into the bridge:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip addr flush vboxnet0
+# ip link set vboxnet0 master virtualnet0
+
+# ip link set qemutap0 master virtualnet0
+</code></pre></div></div>
+
+<p>After that, we create a VETH pair to connect the Docker and the <code class="highlighter-rouge">virtualnet0</code> bridges. Unfortunately, longer names for interfaces are not allowed.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip link add veth-dv-0 type veth peer name veth-dv-1
+# ip addr flush br-8670eabfe12d
+# ip link set veth-dv-0 master virtualnet0
+# ip link set veth-dv-1 master br-8670eabfe12d
+
+# ip link set veth-dv-0 up
+# ip link set veth-dv-1 up
+</code></pre></div></div>
+
+<p>Finally, we check the results - we print the virtual cables connected to our virtual switches (bridges):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># bridge link
+10: vboxnet0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 master virtualnet0 state disabled priority 32 cost 100 
+52: qemutap0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 master virtualnet0 state disabled priority 32 cost 100 
+55: veth3bbd82c@if54: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 master br-8670eabfe12d state forwarding priority 32 cost 2 
+57: veth-dv-1@veth-dv-0: &lt;BROADCAST,MULTICAST,M-DOWN&gt; mtu 1500 master br-8670eabfe12d state disabled priority 32 cost 2 
+58: veth-dv-0@veth-dv-1: &lt;BROADCAST,MULTICAST,M-DOWN&gt; mtu 1500 master virtualnet0 state disabled priority 32 cost 2 
+</code></pre></div></div>
+
+<p>Essentially, what we are seeing now is the same as our second network chart.</p>
+
+<h2 id="assigning-the-client-ip-addresses">Assigning the client IP addresses</h2>
+
+<h3 id="docker">Docker</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># docker exec -it dockernet_tester bash
+bash-5.0# ip addr flush eth0
+bash-5.0# ip addr add 172.24.1.100/16 dev eth0
+bash-5.0# ip route add default dev eth0 via 172.24.0.1
+</code></pre></div></div>
+
+<h3 id="qemu">QEMU</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip addr flush dev eth0
+# ip addr add 172.24.2.100/16 dev eth0
+# ip link set dev eth0 up
+# ip route add default dev eth0 via 172.24.0.1
+</code></pre></div></div>
+
+<h3 id="virtualbox">VirtualBox</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip addr flush dev eth0
+# ip addr add 172.24.3.100/16 dev eth0
+# ip link set dev eth0 up
+# ip route add default dev eth0 via 172.24.0.1
+</code></pre></div></div>
+
+<h2 id="duct-taping-iptables-in-the-default-namespace">Duct taping IPTables in the default namespace</h2>
+
+<p>We are only going to apply here and there some hacks to make Docker and the virtual appliances cooperate in the new network. What you will see works and is probably secure, but the client programs, especially Docker is not prepared for the scenario that we will override IPTables rules by hand. Worst case scenario, it may interfere with our modifications by accident in a way that may lead to security breaches.</p>
+
+<p>I’m sure there is a much better and more official way of configuring Docker out of the way, but let me do it for now manually anyway, only for demonstration purposes (as always).</p>
+
+<h3 id="iptables-debugging-101">IPTables Debugging 101</h3>
+
+<p>While testing with ICMP (ping), seeing timed-out requests can be frustrating. For the rescue, there are some tools that can make our work easier and see what is actually happening with our packets in the system. With these, we can more easily pinpoint the place of the required changes.</p>
+
+<p>The tools <code class="highlighter-rouge">tcpdump</code> and <code class="highlighter-rouge">wireshark</code> are really useful to track which packets appear on what interface.</p>
+
+<p>I also advise installing the Python2 package <code class="highlighter-rouge">watchall</code>. It is a replacement for the <code class="highlighter-rouge">watch</code> utility with the ability to scroll. It can run a command periodically and show the differences in the output. It will be very useful while you’re debugging the firewall rules.</p>
+
+<p>Once it is installed, we can examine the byte counters in real time for all <code class="highlighter-rouge">iptables</code> rules. It is very practical while we’re investigating where requests get dropped.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># iptables -Z  # optionally reset the byte counters
+# watchall -n1 -d -- iptables -L -v 
+</code></pre></div></div>
+
+<p>There is another trick I recommend. If you find that one of your <code class="highlighter-rouge">iptables</code> chains is dropping packets by default, but you’re not sure what filter rules could you create to avoid that (preferably without side effects), you can append a rule to the end of the chain that matches all the remaining packets (that would otherwise would be dropped) and log them first.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -A FORWARD -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+</code></pre></div></div>
+
+<p>(<a href="https://www.thegeekstuff.com/2012/08/iptables-log-packets/">reference: thegeekstuff.com</a>)</p>
+
+<p>After setting up that rule, you may attempt your request again and examine the system logs, with <code class="highlighter-rouge">journalctl -f</code> on a <code class="highlighter-rouge">systemd</code>-based Linux for example. You may see lines like that:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aug 30 13:07:42 ceres kernel: IPTables-Dropped: IN=virtualnet0 OUT=virtualnet0 PHYSIN=veth-dv-0 PHYSOUT=qemutap0 MAC=52:54:00:12:34:56:02:42:ac:15:00:02:08:00 SRC=172.24.1.100 DST=172.24.2.100 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=57703 DF PROTO=ICMP TYPE=8 CODE=0 ID=40 SEQ=1 
+</code></pre></div></div>
+
+<p>Avoiding of this packet being dropped leads us to the first <code class="highlighter-rouge">iptables</code> abuse:</p>
+
+<h3 id="iptables-hack-1-accepting-bridge-traffic">IPTables hack #1: accepting bridge traffic</h3>
+
+<p>Append this rule to allow the appliances on the bridge to reach each other.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -A FORWARD -i virtualnet0 -o virtualnet0 -j ACCEPT
+</code></pre></div></div>
+
+<h3 id="iptables-hack-2-removing-the-docker-isolation-rules">IPTables hack #2: removing the Docker isolation rules</h3>
+
+<p>Find the problematic rules with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># iptables-save | grep br-8670eabfe12d
+[root@ceres ~]# iptables-save | grep br-8670eabfe12d
+-A FORWARD -i br-8670eabfe12d -o br-8670eabfe12d -j ACCEPT
+-A DOCKER-ISOLATION-STAGE-1 ! -s 172.21.0.0/16 -o br-8670eabfe12d -j DROP
+-A DOCKER-ISOLATION-STAGE-1 ! -d 172.21.0.0/16 -i br-8670eabfe12d -j DROP
+</code></pre></div></div>
+
+<p>Remove them:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># iptables -D DOCKER-ISOLATION-STAGE-1 ! -s 172.21.0.0/16 -o br-8670eabfe12d -j DROP
+# iptables -D DOCKER-ISOLATION-STAGE-1 ! -d 172.21.0.0/16 -i br-8670eabfe12d -j DROP
+</code></pre></div></div>
+
+<p>We could, but we do not create them again with the new IP range, because it would block the Internet access of the container. So, do NOT execute these.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># iptables -I DOCKER-ISOLATION-STAGE-1 ! -s 172.24.0.0/16 -o br-8670eabfe12d -j DROP
+# iptables -I DOCKER-ISOLATION-STAGE-1 ! -d 172.24.0.0/16 -i br-8670eabfe12d -j DROP
+</code></pre></div></div>
+
+<p>At this point, we should be to ping the host from the container and vice versa.</p>
+
+<blockquote>
+  <p>Tip: it is even better if you try to send some messages with <code class="highlighter-rouge">netcat</code> from one host to the other.</p>
+
+  <p>Start a server on one host with <code class="highlighter-rouge">nc -l -p 5000</code> and connect to it on the other with <code class="highlighter-rouge">nc &lt;ip&gt; 5000</code>. Then, start chatting. The same messages should appear on both sides.</p>
+</blockquote>
+
+<h2 id="connecting-the-network-to-the-internet">Connecting the network to the internet</h2>
+
+<p>The last step is to connect the default gateway to the <code class="highlighter-rouge">virtualnet0</code> bridge. This connection is made by the <code class="highlighter-rouge">vnetveth0-vnetveth1</code> pair.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ip link add vnetveth0 type veth peer name vnetveth1
+# ip link set dev vnetveth1 netns router
+# ip netns exec router ip addr add 172.24.0.1/16 dev vnetveth1
+# ip netns exec router ip link set dev vnetveth1 up
+
+# ip link set dev vnetveth0 master virtualnet0
+# ip link set dev vnetveth0 up
+</code></pre></div></div>
+
+<p>Enable PAT forwarding for <code class="highlighter-rouge">vnetveth1</code> in the router.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># export WAN=enp0s25 LAN=vnetveth1
+# ip netns exec router \
+    iptables -A FORWARD -i $LAN -o $WAN -j ACCEPT
+# ip netns exec router \
+    iptables -A FORWARD -o $LAN -i $WAN -m state --state RELATED,ESTABLISHED -j ACCEPT
+</code></pre></div></div>
+
+<h2 id="port-forwarding-example">Port forwarding example</h2>
+
+<p>If you wish to make your servers reachable on your physical LAN IP,  you can apply additional rules like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># export SERVER_IP=10.0.22.2
+# export EXTERNAL_PORT=4000
+# export INTERNAL_PORT=4000
+
+# ip netns exec router \
+    iptables -t nat -A PREROUTING -p tcp --dport $EXTERNAL_PORT -j DNAT --to-destination $SERVER_IP:$INTERNAL_PORT
+# ip netns exec router \
+    iptables -A FORWARD -p tcp -d $SERVER_IP --dport $EXTERNAL_PORT -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+</code></pre></div></div>
+
+<p>We also need to apply a technique called NAT Loopback in order to allow clients from the internal LAN - the only one which is the host OS sitting at <code class="highlighter-rouge">10.0.22.2</code> - to access the server at its public IP address. You can <a href="https://serverfault.com/a/205483">read more about this problem here</a>.</p>
+
+<p>The basic idea is that we apply the same MASQUERADE rule that we apply to the outside world if these two criteria meet:</p>
+
+<ul>
+  <li>The request is from the LAN IP range (<code class="highlighter-rouge">10.0.22.0/30</code> in this case)</li>
+  <li>The request is from the enabled destination port</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># export HOST_VETH_NETWORK=10.0.22.0/30
+# ip netns exec router \
+    iptables -t nat -A POSTROUTING -s $HOST_VETH_NETWORK -d $SERVER_IP -p tcp --dport $EXTERNAL_PORT -j MASQUERADE
+</code></pre></div></div>
+
+<h2 id="celebrate">Celebrate!</h2>
+
+<p>And we’re finally done! We have created a mutual LAN for virtual appliances and simulated a home network setup. All the machines and the container should have an Internet access and should see be able reach each other. We could even create port forwarding rules.</p>
+
+<p>It was not an easy run, but it was fun! Well, sometimes at least. I was quite angry at the end. But it worth it.  Really.</p>
+
+<p>(Also, TL;DR for the first question in the previous episode: yes, it is possible.)</p>
+
+<p>Now get back to work ;)</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">Linux Networking</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

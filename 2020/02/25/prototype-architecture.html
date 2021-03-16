@@ -1,0 +1,404 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Prototype Architecture of the Key Container | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Prototype Architecture of the Key Container</h2>
+                <h4>25 February 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>I wanted my phone to handle the critical tasks carried out by a smart card, ensuring that an encryption or signing key could be used without it being present on the computer, where it is very easy to steal. If the phone is able to use the key for me and send only the result of the critical operations to my computer, than this data can remain in a much safer place, preferably on a device that is rendered incapable of establishing wireless connections.</p>
+
+<p>I began thinking about this project with support for old devices forgotten in the drawers in my mind. To target as many as worth it of them, I wish to make my application as portable as possible.</p>
+
+<p>Let me present my initial idea:</p>
+
+<p><a href="/assets/img/key-container/architecture.png" target="_blank">
+<img src="/assets/img/key-container/architecture.png" alt="Key container architecture" />
+</a></p>
+
+<p>In a perfect world, what is on the left of the “Boundary of portability”, should run on even the earliest versions of Android, or on a similar device as a Raspberry Pi - or really anything, that is able to run a tiny Linux-based operating system.</p>
+
+<h1 id="what-i-have-so-far">What I have so far</h1>
+
+<p>Last time I have managed to communicate with my phone over USB. The reason I pursued that was to establish a secure communication line from the computer to the device. Unfortunately, my efforts did not fully achieved their goal as I haven’t found a way to hide the UNIX sockets from other apps on the phone. On Android, I was only able to use abstract sockets, which are visible system-wide.</p>
+
+<p>The attempt was not entirely useless, however. Using the cable instead of a wireless connection gives me an additional wall to break, and a chance not to expose the interface of my key container to a public WiFi network.</p>
+
+<p>At that point, UNIX sockets in the abstract namespace are not more secure than simply opening local ports on the phone, therefore I’m not going to stick to them. Nevertheless, it was an interesting experiment.</p>
+
+<p>In order to ensure that the traffic won’t get intercepted by malicious or exploited buggy applications on the phone, I’ll probably secure the REST API I would like to serve  over the phone with TLS.</p>
+
+<h1 id="project-risks">Project risks</h1>
+
+<p>The devil hides in the details as one says. In the following parts of the series I’m going to make small proof-of-concepts for those ideas that might not be viable. These are:</p>
+
+<ul>
+  <li>Creating native binaries to support devices as old as possible.
+    <ul>
+      <li>Compiling libraries such as OpenSSL or mbed TLS</li>
+      <li>Bundling binaries in a way Android can run and use for us it but we cannot access its data via ADB. That way we can keep our keys safe.
+        <ul>
+          <li>Letting Android start the executable for us that creates the REST server, then accessing the REST server via ADB port forwarding.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Emulating a dummy GnuPG smart card on a Linux PC.</li>
+  <li>(Emulating a dummy PKCS#11 module)</li>
+</ul>
+
+<p>Why the native binaries? We’ll talk about that in the next episode!</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

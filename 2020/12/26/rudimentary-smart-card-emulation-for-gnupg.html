@@ -1,0 +1,512 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Rudimentary Smart Card Emulation Implementation for GnuPG | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Rudimentary Smart Card Emulation Implementation for GnuPG</h2>
+                <h4>26 December 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>A lot of time has passed since the beginning of this semester, in which, me and one of my peers have decided to continue pursuing this project as the chosen topic for a college subject that encourages independent elaboration of our ideas.</p>
+
+<p>As for a recap, the initial goal was to reuse existing hardware for a similar purpose as a smart card is used for in one of its applications: to protect encryption keys from being stolen while those are being used. This is achieved by storing these encryption keys on a separated device, and delegating the cryptographic tasks to be carried out in this safe environment. Only the results get sent back, never any of the keys, making retrieving them much harder for an external threat.</p>
+
+<p>&lt;img src=”/assets/img/key-container/new_simplified_architecture-b.png” width=700px alt=”New, simplified architecture” /&gt;</p>
+
+<p>We have chosen <a href="https://gnupg.org/">GnuPG</a> as our target application instead of <a href="https://www.openssl.org/">OpenSSL</a> with <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">PKI</a>-based keys, for these reasons:</p>
+
+<ol>
+  <li>Although GnuPG does feature smart card support, compliant cards are not that widespread as the PKI-compatible ones are, to our best knowledge. While <a href="https://en.wikipedia.org/wiki/PKCS_11">PKCS#11</a> cards are commonly found in enterprise environments as hardware tokens for enhancing security, the OpenPGP smart card, as a solution, is more community-focused. For in the latter case the cryptographic security mostly depends on the developer, we sense some room for improvement.
+    <ul>
+      <li>In the open source community, we think that GnuPG is the de-facto standard for signing software packages, messages, and other data. (Sub)keys are usually kept and used directly from the user’s disc, probably because most of the open source contributors - including ourselves, if we do - do not find this level of key security as important, as a company, which may risk serious damage by not caring to invest into the equipment.</li>
+      <li>However, for these people, our solution may become an alternative to consider, for in a lot of the cases, it would be ready to set up on an old, offline phone without a penny spent (as usual, if the project ever gets released). Therefore, we really hope that the first usable version will find an audience.</li>
+    </ul>
+  </li>
+  <li>Even if GnuPG may still require one to learn its command line interface, it still appears a much more user-targeted key management application to us, than OpenSSL, which could rather be described as the the go-to all-in-one cryptographic toolkit. With other words, we think that GnuPG targets the end user, while OpenSSL targets the system administrator (who may set up S/MIME and other protocols for the user).</li>
+</ol>
+
+<h2 id="some-minor-architectural-improvements">Some minor architectural improvements</h2>
+
+<p>As the project went on, some of our ideas have matured, hopefully for the better.</p>
+
+<ol>
+  <li>Although in general we still target older smart phones - as we expect unused ones to be accessible for those who are interested in this project -, we recently made an attempt to define more clearly what devices we wish to use for smart card substitution. Therefore, from now on, we talk about generic Key Container Devices (abbreviated as KC-device). This implies, that
+    <ul>
+      <li>in theory, such a device can be either a phone, a board with low power consumption, or a separated computer.</li>
+      <li>The software of the device consists of the portable core and the device-specific frontend (screen on the phone, leds and buttons on a board, etc.)</li>
+    </ul>
+  </li>
+  <li>We clearly see that a JSON-based REST API on the KC-device would rather introduce complications when it comes to binary data, with advantages that are somewhat hard to justify. Having HTTP resources could make sense, as this could provide a mean of separating API functions. However, maybe the format of the data should not be strictly defined, and using the same, binary-data ready <a href="https://en.wikipedia.org/wiki/Canonical_S-expressions">csexp</a> format that GnuPG operates internally with instead of JSON seems to be a better direction.</li>
+</ol>
+
+<blockquote>
+  <p>Nevertheless, seeing the REST API in action on the Android-based KC-device was still a valuable proof of concept.</p>
+</blockquote>
+
+<h2 id="scdaemon-dynamically-loadable-smart-card-backends">scdaemon: dynamically loadable smart card backends</h2>
+
+<p>We have examined the source code of GnuPG and have found, that it is in fact quite modular, and builds upon an architecture that is based on separate processes that communicate with each other. This is carried out by a library called Assuan, which is also responsible for securing the data exchange in the memory. The following diagram was attached in the GnuPG source code documentation, and has shed some light on the inner workings:</p>
+
+<p>&lt;img  src=”/assets/img/key-container/gnupg-card-architecture-b.png” width=800px alt=”GnuPG card architecture” /&gt;</p>
+
+<p>As we see in this figure, through <code class="highlighter-rouge">scdaemon</code>, GnuPG supports multiple smart card reader backends (PC/CS, CT-API, and CCID, to be exact). From our perspective, the only problem is, that meanwhile multiple readers are supported, GnuPG is only compatible with smart cards running the <a href="https://gnupg.org/ftp/specs/OpenPGP-smart-card-application-3.3.pdf">OpenPGP application</a>. That means, that if we wanted to implement the emulation at the level of the card reader, we had to implement a virtual, compliant smart card. While there is <a href="https://g10code.com/p-card.html">a reference implementation available</a> for <a href="http://basiccard.com/">BasicCard</a> programmable smart cards, reimplementing the software or emulating the BasicCard seemed to be the more difficult route, so we have taken another approach instead for a start.</p>
+
+<p>Being an Assuan module, <code class="highlighter-rouge">scdaemon</code> defines a list of API functions that may be called by other programs - such as GnuPG itself. The implementation of some of these commands are specific to the latter mentioned OpenPGP application, while others are related to the module itself. With a little tweaking, we have provided a mean of overriding the card-specific ones by pointing at a custom shared object (<code class="highlighter-rouge">kc_impl.so</code>) to be loaded instead:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ scdaemon --help
+scdaemon (GnuPG) 2.2.20-beta16
+(...)
+Syntax: scdaemon [options] [command [args]]
+Smartcard daemon for GnuPG
+
+Options:
+   --server                 run in server mode (foreground)
+(...)
+   --custom-backend FILE    use custom smart card backend
+(...)
+</code></pre></div></div>
+
+<p>Such a shared object should be linked against the same library versions that <code class="highlighter-rouge">scdaemon</code> is linked against, and must reimplement the otherwise OpenPGP smart card software specific driver functions:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// backend-custom.h</span>
+
+<span class="cp">#include &lt;assuan.h&gt;
+#include &lt;gpg-error.h&gt;
+</span>
+<span class="cm">/**
+ * Implement this file in a shared library. Load with the --custom-backend option.
+ */</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_serialno</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_learn</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_readcert</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_readkey</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_setdata</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_pksign</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_pkauth</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_pkdecrypt</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_getattr</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_setattr</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_writecert</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_writekey</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_genkey</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_random</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_passwd</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_checkpin</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_disconnect</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">custom_cmd_apdu</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">additional_cmd_getinfo</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+<span class="n">gpg_error_t</span> <span class="nf">additional_cmd_restart</span> <span class="p">(</span><span class="n">assuan_context_t</span> <span class="n">ctx</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">line</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="static-implementation">Static implementation</h3>
+
+<p>Right now, we are working on a static implementation that does not contain actual logic, but is only capable for creating the same signature for the same file with the same key.</p>
+
+<p>At this very moment, our implementation is able to report some basic data on the smart card, and the public exponents of an RSA key.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reader ...........: Dummy reader
+Application ID ...: D276000124010340FFFF123456780000
+Application type .: OpenPGP
+Version ..........: 3.40
+Manufacturer .....: ?
+Serial number ....: 12345678
+Name of cardholder: John Doe
+Language prefs ...: [not set]
+Salutation .......: 
+URL of public key : [not set]
+Login data .......: [not set]
+Signature PIN ....: forced
+Max. PIN lengths .: 0 0 0
+PIN retry counter : 0 0 0
+Signature counter : 0
+General key info..: pub  rsa2048/8E242886C1A59F79 2020-09-08 John Doe &lt;john@doe&gt;
+sec#  rsa2048/8E242886C1A59F79  created: 2020-09-08  expires: soha      
+ssb&gt;  rsa2048/B28E6C292ADF668B  created: 2020-09-08  expires: soha      
+                                card-no: FFFF 12345678
+</code></pre></div></div>
+
+<p>In the next two semesters, further progress shall be expected.</p>
+
+<h2 id="check-out-our-entry">Check out our entry!</h2>
+
+<p>We are happy to announce that our work has received an award at Óbuda University at the local event “Tudományos Diákköri Konferencia” (≈”Scientific conference by students”). You may check the original, Hungarian version of the paper at the <a href="/contributions">Contributions</a> menu.</p>
+
+<div class="download-box-wrapper">
+    <div class="box">
+        <div class="texts">
+            <h3>Download</h3>
+            <a href="/contributions/key_container_project/kuklin_vajnai_biztonsagosabb_kulcshasznalat_2020.pdf">
+                <p class="filename">kuklin_vajnai_biztonsagosabb_kulcshasznalat_2020.pdf</p>
+            </a>
+            <p class="desc">The Hungarian paper we have submitted in 2020</p>
+        </div>
+        <a href="/contributions/key_container_project/kuklin_vajnai_biztonsagosabb_kulcshasznalat_2020.pdf">
+            <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/download-solid.svg" />
+</div>
+        </a>
+    </div>
+</div>
+
+<p>Soon after we chose an open source license, the development sources are going to be released under the same menu.</p>
+
+<h2 id="coming-soon">Coming soon</h2>
+
+<p>Taking advantage of the ability to reuse code, we utilize some of the same libraries on the KC-device which are present on the computer with the GnuPG installation. <a href="/2020/04/09/rest-api-over-c-check.html">In an earlier article</a> I have published <a href="https://wiki.archlinux.org/index.php/PKGBUILD">PKGBUILD</a> files for the compilation of native libraries for Android devices, however, that quick and dirty solution has introduced some problems that suggested the need of a more pragmatic approach.</p>
+
+<p>In the next article, I am going to give a write-up on how <a href="https://conan.io/">Conan</a> package manager could help us out.</p>
+
+<p>As always, thanks for reading!</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

@@ -1,0 +1,683 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>How Portable Can We Get With The Compiler | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>How Portable Can We Get With The Compiler</h2>
+                <h4>27 February 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <h1 id="portable-binaries">Portable binaries</h1>
+
+<p>To increase backward compatibility, I’m putting my bet on native binaries for <a href="/assets/img/key-container/architecture.png">what is on the left of the boundary of portability</a>.</p>
+
+<h2 id="why-native-why-not-java">Why native? Why not Java?</h2>
+
+<p>That is also a choice worth considering and in the end I may even change my mind to use Java. Nevertheless, it is not given for free either. I would face two problems:</p>
+
+<ol>
+  <li>Older Android ships with older version of the JVM, which means older supported library versions, including the deprecated cryptographic capabilities (worst-case scenario, I have not looked it up yet).
+    <ul>
+      <li>C++ may have this problem as well, although, in theory and to my best understanding, a newer compiler for the same architecture may help me out with that. It would be worth doing some research on this. However, if C++ fails, then I still have the option to use C.</li>
+    </ul>
+  </li>
+  <li>Java <em>may</em> consume significantly more of the resources which we don’t have, since, again, we’re using old, abandoned devices.
+    <ul>
+      <li>Using Java may exclude from the start some of the non-Android devices I could target</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="problems-with-native-code">Problems with native code</h2>
+
+<p>The Key Container Project requires some cryptographic capabilities and a REST interface.</p>
+
+<p>Shipping portable binary applications for Linux is already challenging enough mostly due to dependency incompatibilities, even on the level of library <a href="https://en.wikipedia.org/wiki/Application_binary_interface">ABIs</a> or libc versions.</p>
+
+<p><a href="https://ownyourbits.com/2018/05/23/the-real-power-of-linux-executables/?fbclid=IwAR3XhY6DaPae0BtkwdmSAbi3k5G6hnuqItIe5wFvONOxKw3oh-QEq7KKR9g">Ownyourbits.com does an amazing job explaining how Linux binaries work</a>, I highly recommend that read.</p>
+
+<p>Linux distributors solve this problem by shipping the software themselves. They compile the packages from the original upstream source and tweak them until they work with that particular OS. Folks at a distribution typically compile together a set of software and library versions in a way that every piece of binary is compatible with their dependencies.</p>
+
+<p>I think the reason that this kind of problem is much less known on a Windows platform is that usually only one or two versions of the operating system is targeted by a specific software. Still, related troubles occur on Windows anyway, and since it does not rely on a sophisticated dependency-based package manager, we’ve got <a href="https://wikipedia.org/wiki/DLL_hell">DLL hell.</a></p>
+
+<h2 id="time-to-set-up-the-emulator">Time to set up the emulator</h2>
+
+<p>My first smart phone running Android was an LG GT540 Optimus, starting from version 1.6. Unfortunately, I have already upgraded it to 2.1 Eclair and later hacked it up to 2.3 Gingerbread, as I desperately wanted to have app2sd support on my phone. It did not have a lot of space for apps.</p>
+
+<p>At the time in high school, I was very enthusiastic about that programmable device right in my pocket. It is true even these days! :)</p>
+
+<p>In order to be able to create an AVD with the old version, I had to download the old SDK:</p>
+
+<p><img src="/assets/img/key-container/downloading_android_sdk_1_6.png" alt="Downloading the old SDK" /></p>
+
+<p>After that I could select the old platform and create the AVD. Now, here comes the problem:</p>
+
+<p><img src="/assets/img/key-container/studio_avd_manager.png" alt="AVD Manager of Android Studio" /></p>
+
+<p>While I am able to start the AVD with Android 7.0, clicking the green play triangle on an AVD with version 1.6 (or even 2.3) just won’t do anything. Not even the console did output any error message. The action in the context menu had the same effect (none).</p>
+
+<p>With <a href="https://stackoverflow.com/questions/60187172/emulate-android-1-6-donut-with-arm-abi?noredirect=1#comment106455518_60187172">a little guidance from Stack Overflow</a> I have downloaded the <a href="https://developer.android.com/sdk/older_releases.html">legacy Android SDK</a>.  The executable for the old AVD Manager UI was at</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>android-sdk-linux_x86-1.6_r1/tools/android
+</code></pre></div></div>
+
+<p><img src="/assets/img/key-container/old_avd_manager.png" alt="Old AVD Manager UI" /></p>
+
+<p>Using the old SDK, I could create an AVD with Android version even as low as 1.5 (API Level 3)! For the sake of adventure, as long as I do not encounter serious problems, I’m sticking with that. This is what is looks like:</p>
+
+<p><img src="/assets/img/key-container/legacy_emulator_android_1_5.png" alt="Emulating Android 1.5 with legacy emulator" /></p>
+
+<p>I’m already feeling nostalgic. Remember the smart phone that looked mostly like your older dumb one but with the capability of <em>installing applications</em> on it? It was like a mini computer! I wonder why I the mood is different of a modern Android device for me.  It’s maybe because of the lack of restrictions at the time.</p>
+
+<h2 id="creating-a-bare-cmake-hello-world-project">Creating a bare CMake hello world project</h2>
+
+<p>Let’s start small:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># CMakeLists.txt:
+
+project (CMakeHelloWorld)
+add_executable (hello hello.cpp)
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// hello.cpp:</span>
+
+<span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello world"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="configuring-the-toolchain">Configuring the toolchain</h3>
+
+<p>In order to compile C++ for Android, we need the Android Native Development Kit, or NDK for short. Among others it contains the appropriate compiler for the platform.</p>
+
+<p>After some digging on the web and opening a couple zip files, it turns out, that the latest NDK that still supports Android 1.5 is revision 11c.</p>
+
+<p>This and other old versions of the kit can be found among <a href="https://developer.android.com/ndk/downloads/older_releases">the unsupported NDK downloads</a>.</p>
+
+<h3 id="creating-a-standalone-ndk-toolchain">Creating a Standalone NDK Toolchain</h3>
+
+<p>According to the <a href="https://developer.android.com/ndk/guides/standalone_toolchain">manual</a>, if I would like to use the NDK tools independently of Android Studio, then what I need is a standalone toolchain compiled.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/opt/kuklinistvan/android-ndk-r11c $ ./build/tools/make-standalone-toolchain.sh
+HOST_OS=linux
+HOST_EXE=
+HOST_ARCH=x86_64
+HOST_TAG=linux-x86_64
+HOST_NUM_CPUS=4
+BUILD_NUM_CPUS=8
+Auto-config: --arch=arm
+Auto-config: --toolchain=arm-linux-androideabi-4.9
+Auto-config: --platform=android-3
+Copying prebuilt binaries...
+Copying sysroot headers and libraries...
+Copying c++ runtime headers and libraries...
+Creating package file: /tmp/ndk-kuklinistvan/arm-linux-androideabi-4.9.tar.bz2
+ERROR: Could not create tarball from /tmp/ndk-kuklinistvan/tmp/build-80038/ndk.3NYb4Dh
+</code></pre></div></div>
+
+<p>Although the archive could not be created for some reason, the directory left behind turns out to be useful on its own.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mv /tmp/ndk-kuklinistvan/tmp/build-80038/ndk.3NYb4Dh ../android-ndk-r11c-standalone
+</code></pre></div></div>
+
+<h2 id="compiling-hello-world">Compiling hello world</h2>
+
+<p>I’ve set up a rudimentary toolchain file to easily work with CMake:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ndk-r11c.toolchain:
+
+set(CMAKE_SYSTEM_NAME Android)
+set(CMAKE_ANDROID_STANDALONE_TOOLCHAIN /opt/kuklinistvan/android-ndk-r11c-standalone/)
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/kuklinistvan/Desktop/cmake-hello-world $ cmake . -DCMAKE_TOOLCHAIN_FILE="ndk-r11c.toolchain"
+-- The C compiler identification is GNU 4.9.0
+-- The CXX compiler identification is GNU 4.9.0
+-- Check for working C compiler: /opt/kuklinistvan/android-ndk-r11c-standalone/bin/arm-linux-androideabi-gcc
+-- Check for working C compiler: /opt/kuklinistvan/android-ndk-r11c-standalone/bin/arm-linux-androideabi-gcc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /opt/kuklinistvan/android-ndk-r11c-standalone/bin/arm-linux-androideabi-gcc
+-- Check for working CXX compiler: /opt/kuklinistvan/android-ndk-r11c-standalone/bin/arm-linux-androideabi-gcc -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/kuklinistvan/Desktop/cmake-hello-world
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make -j4
+make[1]: Entering directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+make[2]: Entering directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+Scanning dependencies of target hello
+make[2]: Leaving directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+make[2]: Entering directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+[ 50%] Building C object CMakeFiles/hello.dir/hello.c.o
+[100%] Linking C executable hello
+make[2]: Leaving directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+[100%] Built target hello
+make[1]: Leaving directory '/home/kuklinistvan/Desktop/cmake-hello-world'
+</code></pre></div></div>
+
+<h2 id="will-it-blend">Will it blend?</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ adb push hello /data/local/hello &amp;&amp; adb shell /data/local/hello
+hello: 1 file pushed. 3.1 MB/s (4005192 bytes in 1.244s)
+Hello world
+[1]   Illegal instruction     /data/local/hello
+</code></pre></div></div>
+
+<p>Oops.</p>
+
+<p>Okay, there are some versions and combinations to try, here are the results.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>C/C++</th>
+      <th>NDK Version</th>
+      <th>Android version</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C++</td>
+      <td>r11c</td>
+      <td>Android 1.5</td>
+      <td>[1]   Illegal instruction</td>
+    </tr>
+    <tr>
+      <td>C++</td>
+      <td>r10e (oldest available)</td>
+      <td>Android 1.5</td>
+      <td>Frozen until Ctrl+C was hit</td>
+    </tr>
+    <tr>
+      <td>C++</td>
+      <td>r11c</td>
+      <td>Android 1.6</td>
+      <td>Worked</td>
+    </tr>
+    <tr>
+      <td>C++</td>
+      <td>r10e</td>
+      <td>Android 1.6</td>
+      <td>Frozen until Ctrl+C was hit</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>r11c</td>
+      <td>Android 1.5</td>
+      <td>Worked</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>r10e</td>
+      <td>Android 1.5</td>
+      <td>Worked</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>r11c</td>
+      <td>Android 1.6</td>
+      <td>Worked</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>r10e</td>
+      <td>Android 1.6</td>
+      <td>Worked</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>I pretty much think, this is the point where I should abandon the idea of C++. It is a much heavier language compared to C with a lot of abstraction and it is very hard to find out what goes wrong if my application crashes on Android.</p>
+
+<p>On the other hand, gcc compiled the C-language hello words in a pretty stable manner and I think there is still hope for the native way.</p>
+
+<p>It is funny, that two days earlier I was trying to get C++17 support.</p>
+
+<div class="xkcd-wrapper">
+    <p>
+        <a href="https://xkcd.com/349">
+            <img src="https://imgs.xkcd.com/comics/success.png" alt="xkcd: Success" title="40% of OpenBSD installs lead to shark attacks.  It's their only standing security issue." />
+            <div class="caption">
+                xkcd no. 349: Success
+            </div>
+        </a>
+    </p>
+
+</div>
+
+<h3 id="fighting-with-compilers-for-modern-c">Fighting with compilers for modern C++</h3>
+
+<p>(spoiler: I’ve lost the battle)</p>
+
+<p>In the beginning I was more naive and actually tried to get the original gcc cross-compile executables for the ARM architecture, expecting them to run on Android. I did that to get modern C++17, because, you know,  why not (actually to ensure modern library compatibility - <em>just in case</em> - and for some convenience)</p>
+
+<p>It took me a couple days to realize that this is not the path worth taking. Running <code class="highlighter-rouge">gcc -v</code> just to see how the original NDK compiler was built was enough for me to stop even trying. Note the line starting with “Configured with:”.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./arm-linux-androideabi-gcc -v
+Using built-in specs.
+COLLECT_GCC=./arm-linux-androideabi-gcc
+COLLECT_LTO_WRAPPER=/opt/kuklinistvan/android-ndk-r11c-standalone/bin/../libexec/gcc/arm-linux-androideabi/4.9/lto-wrapper
+Target: arm-linux-androideabi
+Configured with: /usr/local/google/buildbot/src/android/gcc/toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/002ff922da42f0f80603ab1715cd43d4 --target=arm-linux-androideabi --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/buildbot/tmp/build/toolchain/temp-install --with-mpfr=/buildbot/tmp/build/toolchain/temp-install --with-mpc=/buildbot/tmp/build/toolchain/temp-install --with-cloog=/buildbot/tmp/build/toolchain/temp-install --with-isl=/buildbot/tmp/build/toolchain/temp-install --with-ppl=/buildbot/tmp/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --enable-initfini-array --disable-nls --prefix=/tmp/002ff922da42f0f80603ab1715cd43d4 --with-sysroot=/tmp/002ff922da42f0f80603ab1715cd43d4/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=none --with-gxx-include-dir=/tmp/002ff922da42f0f80603ab1715cd43d4/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-threads --enable-eh-frame-hdr-for-static --enable-graphite=yes --with-isl-version=0.11.1 --with-cloog-version=0.18.0 --with-arch=armv5te --program-transform-name='s&amp;^&amp;arm-linux-androideabi-&amp;' --enable-gold=default
+Thread model: posix
+gcc version 4.9 20150123 (prerelease) (GCC)
+</code></pre></div></div>
+
+<p>Here was what I’ve tried and their results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>What I’ve tried</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Simply use a modern version of the NDK and ignore API incompatibility.</td>
+      <td>Got segfault when running the resulted executable right from the first NDK that has dropped support.</td>
+    </tr>
+    <tr>
+      <td>Cross-compile with a gcc-arm-gnueabi and change the interpreter to Android’s libc and interpreter by patching the ELF executable.</td>
+      <td>Segfault Android.</td>
+    </tr>
+    <tr>
+      <td>Cross-compile with gcc-arm-gnueabi and copy the host’s glibc and interpreter, then patch ELF executables to use that one.</td>
+      <td>Did not find a toolchain for Arch Linux (yeah, for Arch! really!) that compiles for ARM eabi soft float cpu.</td>
+    </tr>
+    <tr>
+      <td>Use Debian ARM Docker image for compiling to solve the upper problem.</td>
+      <td>Segfault on Android. (the beauty in segfaults is that this is pretty much all the information I have on what the problem was - the executable tried to instruct the CPU to do something illegal because of incompatibility)</td>
+    </tr>
+    <tr>
+      <td>Install a Debian ARM virtual machine as a compiling environment to solve the upper problem.</td>
+      <td>No description on how to install Debian 10.3 inside QEMU ARM Virt board, only some blog posts for older versions. Turns out neither is this straightforward and probably does not worth the effort.</td>
+    </tr>
+    <tr>
+      <td>Create an Alpine runtime environment in a folder with all ELF executables patched to use its libc.</td>
+      <td>Worked on the computer, did not on Android, mostly due to the lack of support for soft float version of the binaries for those ARM CPUs that do not have a hardware FPU.</td>
+    </tr>
+    <tr>
+      <td>gcc-arm-none-eabi (the compiler for hardware without OS)</td>
+      <td>Segfault (kind of expected, but tried it anyway)</td>
+    </tr>
+    <tr>
+      <td>Creating a toolchain with crosstool-ng</td>
+      <td>Takes a LOT of time (more than an hour) to compile the toolchain and nothing guarantees that it will work. Yeah, I’ve actually interrupted the process.</td>
+    </tr>
+    <tr>
+      <td>Looking at the NDK source code and try to compile the latest gcc</td>
+      <td>After realizing that not even the official NDK guarantees that the targeted platform is going to be able to run the compiled C++ code, I think it does not worth the time and I’ll probably encounter obstacles that are far beyond my current skills to solve.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="falling-back-to-c">Falling back to C</h2>
+
+<p>Next time I’ll see what are my chances to compile C libraries, like mbed TLS. I hope that the ending of my next post won’t be titled “Falling back to Java”.</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

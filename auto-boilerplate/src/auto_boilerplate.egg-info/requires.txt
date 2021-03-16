@@ -1,0 +1,5 @@
+pyyaml
+
+[testing]
+pytest
+pytest-cov

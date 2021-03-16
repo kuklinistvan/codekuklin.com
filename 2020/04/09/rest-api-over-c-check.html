@@ -1,0 +1,704 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Android Rest API Over C - Check! Finally! | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Android Rest API Over C - Check! Finally!</h2>
+                <h4>09 April 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>First, a little demonstration:</p>
+
+<div class="youtube-wrapper">
+    <div class="videowrapper">
+        <iframe width="100%" src="//www.youtube.com/embed/-sufcaorzQ4" frameborder="0" allowfullscreen=""></iframe>
+    </div>
+</div>
+
+<blockquote>
+  <p>No, I’m not simply sending back a hand-crafted string claiming it being a REST server :) The frontend is still in the fake-wireframe phase though.</p>
+</blockquote>
+
+<p>At this point, if I even have one reader - well, sorry for the long delay. This semester was easy at the beginning and quickly became really tedious as I’ve got plenty of homework assigned over a short period of time. But let’s see the results so far!</p>
+
+<h2 id="plans-with-the-client-side">Plans with the client side</h2>
+
+<p>At its core this application is basically a C library that should be able to carry out the cryptographic procedures needed by GnuPG’s SCDaemon. It is expected to be used with some frontend and is going to have attachable interfaces for platform-specific implementations such as the means of using the available secure data storage. It only happens that early Android devices are targeted for backing hardware in the first place for we have a lot of them.</p>
+
+<p>SCDaemon is bundled with the source of GPG and it serves the purpose of being the mediator between the smart card and the user program. It is supposed to be used over <a href="https://en.wikipedia.org/wiki/Inter-process_communication">IPC</a> and it provides an abstraction for specific smart cards and for the OpenPGP applet. Its interface looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./scdaemon --server
+OK GNU Privacy Guard's Smartcard server ready
+HELP
+
+(...content skipped...)
+
+# SERIALNO [--demand=&lt;serialno&gt;] [&lt;apptype&gt;]
+# LEARN [--force] [--keypairinfo]
+# READCERT &lt;hexified_certid&gt;|&lt;keyid&gt;
+# READKEY [--advanced] &lt;keyid&gt;
+# SETDATA [--append] &lt;hexstring&gt;
+# PKSIGN [--hash=[rmd160|sha{1,224,256,384,512}|md5]] &lt;hexified_id&gt;
+# PKAUTH &lt;hexified_id&gt;
+# PKDECRYPT &lt;hexified_id&gt;
+# INPUT
+# OUTPUT
+
+(...content skipped...)
+</code></pre></div></div>
+
+<p>We will get back to that later when the client of this solution is implemented.</p>
+
+<p>Right now the advancement is that we have a C library that is suitable for creating a TLS-secured REST API quite easily - it is called <a href="https://github.com/babelouest/ulfius">Ulfius</a> - and it works both on my computer and on Android 1.5 (in the emulator at the very least).</p>
+
+<h2 id="preparing-the-rest-server-for-the-emulator">Preparing the REST server for the emulator</h2>
+
+<p>Writing code with Ulfius for my hello-rest API in C is quite friendly and straightforward. After setting up the network parameters - parameters like which IP to bind on which port - basically all I do is define the endpoints with <code class="highlighter-rouge">ulfius_add_endpoint_by_val()</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">kc_start_accepting_requests</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">bindaddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">bindaddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+    <span class="n">inet_aton</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bindaddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">);</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">ulfius_init_instance</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ulfius_instance</span><span class="p">,</span> <span class="n">PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bindaddr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="n">U_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Error initializing ulfius!"</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">u_map_put</span><span class="p">(</span><span class="n">ulfius_instance</span><span class="p">.</span><span class="n">default_headers</span><span class="p">,</span> <span class="s">"Access-Control-Allow-Origin"</span><span class="p">,</span> <span class="s">"*"</span><span class="p">);</span>
+    <span class="n">ulfius_instance</span><span class="p">.</span><span class="n">max_post_body_size</span> <span class="o">=</span> <span class="mi">32768</span><span class="p">;</span>
+    <span class="n">ulfius_add_endpoint_by_val</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ulfius_instance</span><span class="p">,</span> <span class="s">"GET"</span><span class="p">,</span> <span class="s">"/hello"</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">callback_get_test</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">ulfius_start_framework</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ulfius_instance</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The handler for the simple <code class="highlighter-rouge">/hello</code> endpoint looks like this:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">callback_get_test</span> <span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">_u_request</span> <span class="o">*</span> <span class="n">request</span><span class="p">,</span> <span class="k">struct</span> <span class="n">_u_response</span> <span class="o">*</span> <span class="n">response</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">user_data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">json_t</span> <span class="o">*</span><span class="n">root</span> <span class="o">=</span> <span class="n">json_object</span><span class="p">();</span>
+    <span class="n">json_object_set_new</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s">"response"</span><span class="p">,</span> <span class="n">json_string</span><span class="p">(</span><span class="s">"Hello dude!"</span><span class="p">));</span>
+    <span class="n">ulfius_set_json_body_response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+    <span class="n">json_decref</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">U_CALLBACK_COMPLETE</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Neat! After compiling the source on the computer and running the executable I can read in my browser at <code class="highlighter-rouge">http://127.0.0.1:5777/hello</code> the response that is being constructed here. The first obstacle is solved.</p>
+
+<h2 id="running-on-android">Running on Android</h2>
+
+<p>As the early Android devices rely on the ARM CPU architecture, the natively compiled code that my machine can run is not executable on the phone. We have to compile our software, the library and all of its dependencies using the compilers supplied with Android NDK.</p>
+
+<h3 id="library-trouble">Library trouble</h3>
+
+<p>It turned out quickly that my best bet is to link the libraries statically as it was a little unpredictable when will the shared libraries work. In short, shared or dynamically linked libraries consist of separate files <code class="highlighter-rouge">.so</code> files - similar to the <code class="highlighter-rouge">.dll</code> files on Windows - that are required to be at a well-known place at runtime.</p>
+
+<p>Their advantages include that:</p>
+
+<ul>
+  <li>In my experience they are wildly used: some libraries do not provide a statically linkable archive.</li>
+  <li>They seem to be easier to link to as unresolved dependencies are reported both compile time as well as at execution time - in the latter case even naming the missing <code class="highlighter-rouge">.so</code> files</li>
+  <li>Multiple executables or intermediate libraries can rely on the same file, sparing disk space
+    <ul>
+      <li>(not actually a huge advantage here because we are going to bundle them into the <code class="highlighter-rouge">.apk</code> anyway)</li>
+    </ul>
+  </li>
+  <li>They can be easily switched without recompiling the software with other versions or forks of the library - a reason that makes easier to comply to licenses like the GNU LGPL (<a href="https://www.gnu.org/licenses/lgpl-3.0.html">see point 4/d</a>)
+    <ul>
+      <li>(again, the <code class="highlighter-rouge">.apk</code> needs to be reassembled anyway)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>By contrast, a statically linked library is bundled into the executable.</p>
+
+<ul>
+  <li>It is easier to distribute the executable with them as it is mostly self-contained.</li>
+  <li>I did not have uncertain results with them so far as opposed to dynamically linked libraries: Android 1.6 seemed to be able to use the same dynamically linked library that Android 1.5 could not.</li>
+  <li>In theory, only the relevant functions and parts are going be copied into the target executable or shared library.</li>
+</ul>
+
+<p>I’m using what worked - static libraries in this case.</p>
+
+<p>Whether I use static or shared libraries I had to compile them one by one. I’ve done that and even automatized the process using <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code class="highlighter-rouge">PKGBUILD</code></a> recipes for Arch Linux. You may <a href="https://github.com/kuklinistvan/libraries-for-android-ndk-r10e">find these files on GitHub</a>. There is even a <code class="highlighter-rouge">Dockerfile</code> for a compiling environment. The package <code class="highlighter-rouge">android-ndk-r10e-s-arm</code> contains a <code class="highlighter-rouge">cmake.toolchain</code> file to make the use of the libraries easier.</p>
+
+<p>With the compiled libraries under my belt I was able to successfully craft the ARM executable.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;kc.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Starting kc-core server</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">kc_start_accepting_requests</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hit RETURN to stop server</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">getchar</span><span class="p">();</span>
+    <span class="n">kc_stop_accepting_requests</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/key-container/basic-demo-static_works_on_droid.png" alt="basic-demo-static_works_on_droid" /></p>
+
+<p>Please note that this did not work on the first try. Not even on the second. But, anyhow, the second obstacle was solved too.</p>
+
+<h2 id="creating-the-application-for-android">Creating the application for Android</h2>
+
+<p>Now <em>this</em> was not easy. In the <a href="/2020/02/27/how-portable-can-we-get.html">previous article</a> I wrote about hunting down the old SDK.</p>
+
+<p>It was time to fumble with the appropriate <a href="https://www.eclipse.org/">Eclipse</a> versions that works with the appropriate <a href="https://stuff.mit.edu/afs/sipb/project/android/docs/tools/sdk/eclipse-adt.html">ADT</a> versions - as that was the way one was maintaining an Android app before Android Studio. When I first tried to use the latest eclipse with <em>some</em> ADT that I first found working, it was buggy, but the <code class="highlighter-rouge">.apk</code> somehow was produced anyway. It happened in a weird way - Eclipse literally and consistently built it <em>after every second attempt to run the app</em> and not even then got a notification about it because of other errors related to Eclipse trying to communicate with ADB. Being frustrated with the errors I’ve opened absent-minded the <code class="highlighter-rouge">bin/</code> folder of the project and I’ve found the treasure I was looking for. I could push it to the emulator and it ran!</p>
+
+<p>So, it worked… mostly. …well…. then… I’ve decided to clean up my machine and reinstall Arch as it was really filled with all the unnecessary garbage I’ve loaded onto that more than 2-years-old installation.</p>
+
+<p>Relatively quickly I’ve set up the SDK and the emulator again, then reinstalled the prebuilt packages I’ve made out of the libraries. I’ve got back to the point where <code class="highlighter-rouge">basic-demo-static</code> worked. Then Eclipse could not produce an APK anymore with the new setup that was meant to be the same as before.</p>
+
+<h3 id="traveling-back-in-time-to-around-2009">Traveling back in time to around 2009</h3>
+
+<p>That was the point that there were so many possible misaligned and unsupported versions producing weird phenomena and bugs that I’ve considered a new strategy. I’ve looked up the <a href="https://en.wikipedia.org/wiki/Android_version_history">Wikipedia page</a> on the release dates to find that Android 1.5 came out in April, 2009 and started to assemble an environment that resembled a developers tooling at around 2009 or 2010.</p>
+
+<p>After some more googling and trials and errors I’ve set up the final environment:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Version</th>
+      <th>Release date (month)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VirtualBox &amp; Guest additions<br />(<a href="https://www.virtualbox.org/ticket/6034">hint on compatibility</a>)</td>
+      <td>latest (6.1.4), from package manager</td>
+      <td>(not relevant)</td>
+    </tr>
+    <tr>
+      <td>Ubuntu</td>
+      <td><a href="http://old-releases.ubuntu.com/releases/hardy/">8.04 LTS</a>, i368 version</td>
+      <td>April, 2008</td>
+    </tr>
+    <tr>
+      <td>Android SDK</td>
+      <td><a href="https://dl.google.com/android/archives/android-sdk-linux_x86-1.6_r1.tgz">1.6 r1</a></td>
+      <td>September, 2009</td>
+    </tr>
+    <tr>
+      <td>Sun Java JDK</td>
+      <td>6 (from <a href="https://askubuntu.com/a/91821">Ubuntu’s archived packages</a>)</td>
+      <td>December, 2006</td>
+    </tr>
+    <tr>
+      <td>Eclipse</td>
+      <td><a href="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/ganymede/SR2/eclipse-java-ganymede-SR2-linux-gtk.tar.gz">Ganymede, 3.4.2</a> (“SR2 package”)</td>
+      <td>June, 2008</td>
+    </tr>
+    <tr>
+      <td>Eclipse ADT</td>
+      <td><a href="http://dl.google.com/android/ADT-0.9.5.zip">0.9.5</a></td>
+      <td>December, 2009</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The hardest part was to find the relevant ADT version as I did not found a table on the versions and the release dates. What I did found, however, thanks to a Stack Overflow user, the <a href="https://stackoverflow.com/a/4710123">old version download links</a>.</p>
+
+<p>Lucky enough, <a href="https://web.archive.org/web/20100109124342/http://developer.android.com/intl/zh-TW/sdk/index.html">WaybackMachine came to the rescue</a>. The snapshot in the image of <code class="highlighter-rouge">developer.android.com</code> has been captured in January, 2010.</p>
+
+<p><img src="/assets/img/key-container/adt_version_clue.png" alt="Clue that I need Android ADT 0.95" /></p>
+
+<h4 id="putting-the-vm-together">Putting the VM together</h4>
+
+<p>It is miracle that the virtual machine not only can produce <code class="highlighter-rouge">.apk</code> files in a reliable way, but it is able to run relatively smoothly the Android emulator which integrates well with Eclipse. With one click I can deploy the application from the IDE and test it.</p>
+
+<h2 id="last-challenge-can-the-java-frontend-use-our-small-hello-rest-c-library">Last challenge: can the Java frontend use our small hello-REST C library?</h2>
+
+<p>The theory is relatively straightforward. In order to use the native library from Java, first I need to fit it to a <a href="https://en.wikipedia.org/wiki/Java_Native_Interface">JNI interface</a>.</p>
+
+<p>That means, that if I want to use these functions defined in my header:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// kc.h:</span>
+<span class="cp">#pragma once
+#include &lt;netinet/in.h&gt;
+</span>
+<span class="kt">void</span> <span class="nf">kc_start_accepting_requests</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">kc_stop_accepting_requests</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Then I need to create a “translator” lib.</p>
+
+<p>First I define the same functions in the Java interface:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">codekuklin</span><span class="o">.</span><span class="na">kc_droid_frontend</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KC_Core</span> <span class="o">{</span>
+	<span class="kd">static</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">"kc-core-bridge"</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">startAcceptingConnections</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">native</span> <span class="kt">void</span> <span class="nf">stopAcceptingConnections</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>With <code class="highlighter-rouge">System.loadLibrary()</code> calls I specify all the libraries, that are required for the functions below to run. In this case, it is only <code class="highlighter-rouge">libkc-core-bridge.so</code>, as it is going to be designed to be a self-contained shared library.</p>
+
+<p>Then:</p>
+
+<ol>
+  <li>I need to compile the application</li>
+  <li>After changing directory to the <code class="highlighter-rouge">bin/</code> folder (where the compiled classes are), I need to generate the header of the translator lib</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.../bin $ javah -o kc-core_bridge.h -classpath . com.codekuklin.kc_droid_frontend.KC_Core
+</code></pre></div></div>
+
+<p>Here is the result:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// kc-core-bridge.h:</span>
+
+<span class="cm">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+<span class="cp">#include &lt;jni.h&gt;
+</span><span class="cm">/* Header for class com_codekuklin_kc_droid_frontend_KC_Core */</span>
+
+<span class="cp">#ifndef _Included_com_codekuklin_kc_droid_frontend_KC_Core
+#define _Included_com_codekuklin_kc_droid_frontend_KC_Core
+#ifdef __cplusplus
+</span><span class="k">extern</span> <span class="s">"C"</span> <span class="p">{</span>
+<span class="cp">#endif
+</span><span class="cm">/*
+ * Class:     com_codekuklin_kc_droid_frontend_KC_Core
+ * Method:    startAcceptingConnections
+ * Signature: ()V
+ */</span>
+<span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="n">Java_com_codekuklin_kc_1droid_1frontend_KC_1Core_startAcceptingConnections</span>
+  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+
+<span class="cm">/*
+ * Class:     com_codekuklin_kc_droid_frontend_KC_Core
+ * Method:    stopAcceptingConnections
+ * Signature: ()V
+ */</span>
+<span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="n">Java_com_codekuklin_kc_1droid_1frontend_KC_1Core_stopAcceptingConnections</span>
+  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+
+<span class="cp">#ifdef __cplusplus
+</span><span class="p">}</span>
+<span class="cp">#endif
+#endif
+</span>
+</code></pre></div></div>
+
+<p>Now it is the time to fit my library by implementing this header:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "kc-core-bridge.h"
+#include &lt;kc.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_codekuklin_kc_1droid_1frontend_KC_1Core_startAcceptingConnections</span>
+  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span> <span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+    
+	<span class="n">kc_start_accepting_requests</span><span class="p">();</span> <span class="c1">// nothing rocket science, just calling the appropriate function</span>
+    
+<span class="p">}</span>
+
+<span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_codekuklin_kc_1droid_1frontend_KC_1Core_stopAcceptingConnections</span>
+  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span> <span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+    
+	<span class="n">kc_stop_accepting_requests</span><span class="p">();</span> <span class="c1">// nothing rocket science, just calling the appropriate function</span>
+    
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>…then to compile this library into a shared library.:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>arm-linux-androideabi-gcc <span class="se">\</span>
+        <span class="nt">-Iinclude</span> <span class="se">\</span>
+        <span class="nt">-Wl</span>,--start-group ./alllibs/<span class="k">*</span>.a kc-core-bridge.c <span class="nt">-Wl</span>,--end-group <span class="se">\</span>
+        <span class="nt">-shared</span> <span class="se">\</span>
+        <span class="nt">-o</span> target/libkc-core-bridge.so
+</code></pre></div></div>
+
+<p>This command line produces a self-contained shared library with no intermediate dependencies.</p>
+
+<p>Note, that by default, the linker would resolve the dependencies by iterating over the libraries specified in the given order only once. Here, these libs are probably going to be substituted in an alphabetical order after <code class="highlighter-rouge">./allibs/</code>. In my case, leaving the ordering so causes the produced lib to have <em>a lot</em> of unresolved and unlinked functions remaining. This happens because they are not ordered by their dependencies.</p>
+
+<p>With this start/stop group ugly hack, we’re asking the linker instead to repeat this iteration over and over again until all the unresolved dependencies are found.</p>
+
+<blockquote>
+  <p>Using this method is also a way to resolve circular dependencies among these libraries (which, ewww, you should not have between them! what’s the point of having two separate modules if they only can be used together?).</p>
+</blockquote>
+
+<p>According to <a href="https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking">Eli Bendersky’s blog</a>, the reason it is done so by default - running the linker only once while expecting a topologically correct order of the dependent libraries - is simply that it would have a significantly higher performance cost - that is, it would be slower.</p>
+
+<p>But, for now, who cares, right? ;) (this is how a typical sentence reads like that is surely going to backfire, sometimes in two hour’s time)</p>
+
+<p>After some messing again, it looks like it is the simplest method to bundle the lib if we drop it into <code class="highlighter-rouge">${PROJECT_ROOT}/libs/&lt;abi&gt;</code>, where <code class="highlighter-rouge">&lt;abi&gt;</code> is <code class="highlighter-rouge">armeabi</code> in our case. The library is going to be bundled with the <code class="highlighter-rouge">APK</code>. You may examine its content using a zip archiver to see if it is really there.</p>
+
+<p>The last step is to call the library functions in the application. For testing purposes, I’m doing this at the first viable place in the code - when constructing the first activity:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KC_Core</span> <span class="n">kc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KC_Core</span><span class="o">();</span>
+<span class="n">kc</span><span class="o">.</span><span class="na">startAcceptingConnections</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Compile and start the application, then forward the appropriate port with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ adb forward tcp:5777 tcp:5777 # my API is served on the port 5777
+</code></pre></div></div>
+
+<p>And, you’re finally at the point that the video demonstrated!</p>
+
+<p>I think, next time I will investigate SCDaemon and try to hack it to report the presence of a fake smart card.</p>
+
+<p>As always, thanks for reading!</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

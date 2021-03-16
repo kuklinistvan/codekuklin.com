@@ -1,0 +1,415 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>An Android Phone As A Secure Key Container | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>An Android Phone As A Secure Key Container</h2>
+                <h4>26 December 2019</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">The Key Container Project</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/wasting-phones-wasting-technology.html">Part 1: Wasting phones, wasting technology!</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2019/12/26/an-android-phone-as-a-secure-key-container.html">Part 2: An Android Phone As A Secure Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">Part 3: Communicating With An Android App Over USB</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/25/prototype-architecture.html">Part 4: Prototype Architecture of the Key Container</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/02/27/how-portable-can-we-get.html">Part 5: How Portable Can We Get With The Compiler</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/04/09/rest-api-over-c-check.html">Part 6: Android Rest API Over C - Check! Finally!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/12/26/rudimentary-smart-card-emulation-for-gnupg.html">Part 7: Rudimentary Smart Card Emulation Implementation for GnuPG</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>Speaking of recycling old Droids, there is an application that I am particularly interested in and that is keeping encryption and signing keys secure even while using them. An encryption key in its form is a small piece of data (a couple kilobytes). It is, by its nature, very easy to steal, on the other hand, it is very difficult to forge. A device that allows the user to use such a key without risking that the computer may leak it, is called a smart card.</p>
+
+<h1 id="what-are-smart-cards">What are smart cards?</h1>
+
+<p>A <a href="https://en.wikipedia.org/wiki/Smart_card">smart card</a> is a so-called authorization device that can be used for a purpose similar what we would hire an actual doorkeeper for. A doorkeeper holds keys for doors, he or she can recognize you (authenticate) and can use one of the keys for you if he or she finds your permissions eligible (authorize). The keys, however, are never given in your hands. The most you can ask such an electronic doorman is to throw a key away, no matter who you are.</p>
+
+<p><img src="https://cdn.pixabay.com/photo/2012/12/19/18/15/call-71168_960_720.jpg" alt="smart cards" style="width: 500px" /></p>
+
+<p>A smart card is a hardware device designed among other purposes to secure the use of encryption, <a href="https://en.wikipedia.org/wiki/One-time_pad">one time pad</a> and other keys of that matter. Once you’ve sent a key to a smart card, you are unable to retrieve it again. After proving you identity (usually by entering a PIN or touching a fingerprint sensor), you can use the key, or you can delete it, but you cannot download it. As a consequence, neither a spyware is able to do that on your machine, waiting to steal your key. The hardware simply does not support that instruction. The most harm a virus could cause against this protection is using the hardware while it is plugged into the computer. Disconnecting it leaves the malicious software is disarmed.</p>
+
+<h1 id="what-can-i-do-with-a-smart-card">What can I do with a smart card?</h1>
+
+<p>With a computer, a smart card may come in hand for:</p>
+
+<ul>
+  <li>Encrypting or decrypting data</li>
+  <li>Digitally signing software, emails or messages</li>
+  <li>Using for authentication, even for logging into a remote resource, such as a VPN server or a machine through SSH</li>
+</ul>
+
+<p>Okay, maybe you’re sold, maybe not. Let me present the idea anyway :)</p>
+
+<h2 id="a-silent-smart-phone-as-a-secure-key-container">A “silent” smart phone as a secure key container</h2>
+
+<blockquote>
+  <p><em>Disclaimer: what I am thinking about is <strong>not</strong> converting an Android phone into an NFC card reader, neither emulating a contactless NFC smart card. (<a href="https://medium.com/the-almanac/how-to-build-a-simple-smart-card-emulator-reader-for-android-7975fae4040f">Here is an interesting article by Mohamed Hamdaoui on the topic</a>). Instead, I would like to create a safe key container that is accessible from a computer via a smart card interface.</em></p>
+</blockquote>
+
+<p>If you have a phone that is incapable of remotely transmitting data (preferably, either by physically damaging or removing the transmitters - well, if this is possible at all -, or at least by rooting the phone and disabling the drivers), your phone can also behave like a secure container…</p>
+
+<p>…but, wouldn’t it be simpler to just purchase a smart card instead of all that hassle above, then?</p>
+
+<p>Well, If you need maximum security in an enterprise environment, preferably with support and hardware certification, then I strongly suggest you investing in actual smart cards and stop reading. This is a proof of concept project at the “i have an idea” state, not a robust solution. On the other hand, if you only would like to use a somewhat better safe for your OpenPGP or S/MIME signing keys than your computer itself, you may consider these advantages:</p>
+
+<ul>
+  <li>Given a complete solution of this project, converting your phone would be as easy as installing an app and downloading a driver for your computer.</li>
+  <li>You don’t need to purchase hardware (in comparison: a YubiKey device usually costs around $40)</li>
+  <li>You can emulate virtually any number of smart cards on a single android device - as keys are quite small -, therefore what you get is a virtually unlimited number of smart cards.
+    <ul>
+      <li>This is particularly useful in the case of OpenPGP keys where the standard only allows you to have one key per purpose on a smart card.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>In order to achieve that, we need a secure, and preferably a stable, independent communication line to our Android device - and a WiFi connection is not something I would consider eligible for that purpose, even if it is much easier to implement. This is my motivation behind <a href="/2019/12/26/communicating-with-an-android-app-over-usb.html">achieving communication over USB with an android app</a>.</em></p>
+
+<h2 id="ambitious-talk">Ambitious talk…</h2>
+
+<p>Actually, converting an old phone into a smart card-like device in that sense seems to be a big enough topic for me and for my free time to have the reason to worry about quantum computing. It may evolve to the point quicker, where data signing and encryption <a href="https://en.wikipedia.org/wiki/Post-quantum_cryptography">may no longer will be relevant</a>, than I will be able to build something useful out of an old phone for this purpose. However, I still like this idea for keeping encryption keys secure and I am willing to invest some amount of time in it for the sake of experience.</p>
+
+<p>At the very least, I am ready to do some research.</p>
+
+<p>Follow the series for updates!</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">The Key Container Project</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

@@ -1,0 +1,492 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>Choosing a Static Site Generator | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>Choosing a Static Site Generator</h2>
+                <h4>23 January 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">Getting ready for blogging!</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/14/first-post.html">Part 1: Getting ready for blogging!</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2019/12/20/two-of-my-most-valued-site-generator-features.html">Part 2: Two Features Of Site Generators I Cannot Go Without</a>
+                </li>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/01/23/choosing-a-static-site-generator.html">Part 3: Choosing a Static Site Generator</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+    
+
+    <article>
+        <p>Summarizing the moral of my efforts made so far to build a blog, I’m stating here for the record again that it is not always trivial to find the appropriate tools for the job. Therefore, I must know exactly what problem I wish to solve by using one of these shiny static site generators.</p>
+
+<p>On my motivation you may learn more either on the <a href="#series-box-anchor">in the previous articles of the series</a>. On the progress of installing and developing the exact features there I’ve also created <a href="/roadmap">a roadmap</a>.</p>
+
+<h1 id="what-i-am-looking-for">What I am looking for</h1>
+
+<p>I think that it is usually wise to enumerate our personal criteria before opting for one tool or the other, also considering whether we need one in the first place. Here are my priorities:</p>
+
+<h2 id="stability">Stability</h2>
+
+<p>From a general point of view, I’m planning long term, therefore I would like to build a maintainable system. It either has to utilize less automation (“magic”) or it has to do that behind a stable API and through a stable manner. It is not that great if my product breaks on every minor version update of the framework I use either because of a bug or an interface change.</p>
+
+<h3 id="maturity">Maturity</h3>
+
+<p>It does impress me when I see a project with over 40 000 stars on GitHub, but building upon it becomes instantly out of question if it isn’t at least 2-3 years old and still actively developed. Given active maintenance, I find the older, the better. I consider it also a good sign if there is a couple major version numbers behind the project.</p>
+
+<h2 id="ease-of-use">Ease of use</h2>
+
+<p>I think, that the ideal framework is one that allows me to concentrate on creating content and make changes on the appearance or the structure of the site, instead of forcing me to fight against that particular framework itself. It should be well documented, easy to use and out of the way. The perfect tool is a tool I don’t know about. By contrast, a tool that may use some improvement is one that has a steep learning curve.</p>
+
+<h2 id="versatility">Versatility</h2>
+
+<p>When I’m outsourcing some of my jobs to some form of automation, then I’m also making a decision on what contracts I want to define myself and what are the ones that I don’t find really important, and therefore I am willing to obey to.</p>
+
+<p>The contracts I demand are:</p>
+<ul>
+  <li>The ability to template using layouts and includes/widgets</li>
+  <li>The ability to template “semi-programatically” according to some data model and source - with other words, to generate templates according to, for example, the contents of a <code class="highlighter-rouge">.json</code> file. (<a href="https://jinja.palletsprojects.com">Jinja2</a> is a templating language for Python with this capability, meanwhile <a href="https://golang.org/pkg/text/template/">Golang templates</a> also features that)</li>
+  <li>The ability to start from scratch, without a theme or anything fancy, and start enabling the features one by one.</li>
+</ul>
+
+<p>What I don’t find that important:</p>
+<ul>
+  <li>Which templating language is used</li>
+  <li>What programming language is the framework written in</li>
+  <li>What is the format of the data file</li>
+  <li>Build time, given it is not horribly unacceptably long (more than 1-1.5 second for a post like this one)</li>
+</ul>
+
+<h1 id="on-being-too-critical-minded">On being too critical minded</h1>
+
+<p>Note that while I define these needs with ideal assumptions, I am actually aware of the reality that surrounds me. It is a fact that I get most of these tools for free in exchange for a small attribution. It is also true that these are developed mostly by enthusiastic volunteers, by sponsored people in some cases, and it also happens that a company open sources some of its source code.</p>
+
+<div class="xkcd-wrapper">
+    <p>
+        <a href="https://xkcd.com/1150">
+            <img src="https://imgs.xkcd.com/comics/instagram.png" alt="xkcd: Instagram" title="I'm gonna call the cops and get Chad arrested for theft, then move all my stuff to the house across the street. Hopefully the owners there are more responsible." />
+            <div class="caption">
+                xkcd no. 1150: Instagram
+            </div>
+        </a>
+    </p>
+
+</div>
+
+<p>When I lay out what a particular implementation should or should not do, I’m not claiming that the ones failing the fulfill some of my requirements are worthless software. In fact, I am more than thankful for every developer who help others by providing intermediate tooling. They make the work easier for lots of people creating software for the end user behind the scenes. Nevertheless they are not the ones who receive the most credit however essential their work is. Just think of the well hidden “legal” menu section of Android settings - that is the place for the framework and library creators to receive credit, and I am guilty of this practice myself as well.</p>
+
+<p>Criticism, on the other hand, can have more use than sounding arrogant. I believe, that having a vision of the perfect product is the key for improvement, for it is the way to recognize the practical weaknesses. As someone who thrives for the best what is feasible in a situation, I like thinking critically, and use that mindset as a compass for creating a better product. Meanwhile, defining my requirements also helps me finding a good enough solution instead of the best one, which effort is usually the enemy of getting things done at all.</p>
+
+<p>Once again, I hereby would like to say thank you for all the developers of open source libraries and tools! Please check out the <a href="/legal">legal acknowledgements</a> menu for all the credits of this site.</p>
+
+<h1 id="lets-see-what-we-have-on-the-shelf">Let’s see what we have on the shelf</h1>
+
+<p>Time for me to make a choice! Let me share with you my experience with some of the generators I have given a chance.</p>
+
+<h2 id="hugo">Hugo</h2>
+
+<p>A promising candidate with long history of development, and I would happily come back once to see how it has progressed since. As far as I informed myself, at this stage it complies to my demands on functionality. I would not say yet that I am ready to use it in production, however:</p>
+
+<ul>
+  <li>We have it since 2013, but it still has not reached version 1.0. Maybe it is just a convention I find weird, but 0.something as a version number usually indicates for me that the project is not yet ready with the originally planned minimal feature set.</li>
+  <li>When I did some test runs, I had a problem with the workflow as well:</li>
+</ul>
+
+<p>There is a lot of work in the documentation which I always find invaluable. I have successfully launched a Hugo site with a recommended theme, and could learn on the concepts a lot. Despite that, when I wanted to build my own look and feel while adding content incrementally, I had a hard time finding anything official on how to start using this generator from scratch, that is, without a theme.</p>
+
+<p>I did not want to learn the complete framework just to get started, only one feature at a time. I wanted to start building block by block, carefully choosing what I need and what I don’t. Using Hugo the way I tried felt like just having to put in too much work to release the first version of the site. After fumbling a couple hours for some days with it without sensing an actual progress, I moved on. (I think, I’m experiencing the phenomenon called <a href="https://en.wikipedia.org/wiki/Feature_creep">feature creep</a>)</p>
+
+<p>Well, note also that Hugo was the first on my list to try and I have got to it with no experience on SSGs whatsoever. It calms me that I know <a href="https://discourse.gohugo.io/t/solved-is-a-theme-a-requirement/2154/11">I was not the only one</a> who encountered this issue.</p>
+
+<p>I think, that this problem can be easily fixed by extending its documentation and I’m happy to look back some time later, as it has already gathered around itself a really large community who have put a lot of work into it.</p>
+
+<p>(and I also like the idea of saving processing power by utilizing a resource friendlier programming language)</p>
+
+<h2 id="gridsome">Gridsome</h2>
+
+<p>After having a pleasant experience with <a href="https://vuejs.org/">Vue.js</a>, I was interested in <a href="https://www.gatsbyjs.org/">Gatsby</a>’s clone in the Vue world. Here is my experience.</p>
+
+<p>I could use all the features I had in Vue, including its modular system and element encapsulation - one of my most desperately wanted features.</p>
+
+<p>By element encapsulation I’m referring to bundling HTML structure, CSS styling and JavaScript code to one file, making sure their behavior does not affect the rest of the site. I find the hardest part of that task segregating the targets of the stylesheet, and Vue does a great job with <a href="https://vue-loader.vuejs.org/guide/scoped-css.html">its <code class="highlighter-rouge">&lt;style scoped&gt;</code> tag</a>.</p>
+
+<p>As this framework does utilize some JavaScript to cache page content, I could argue that its loading times were even shorter than simply reloading plain html files.</p>
+
+<p>It felt like developing an application in Vue.js as I was used to it, except I already have the routes, layout and include system, etc. wired out. I could just start laying out my site and that was a really great experience! I also would like to mention that the generated starter boilerplate contained a lot of really helpful documentation comment and made it easy for me to know what I should keep and what can I clean up.</p>
+
+<p>I quickly designed the content area and the sidebar, and it was a seamless experience! Somehow, nothing collided! Frankly, I did not have a word.</p>
+
+<p>I fell in love with this framework quickly, then I did some research and backed off two steps.</p>
+
+<ul>
+  <li>Its most up-to-date version is 0.7.12</li>
+  <li>We have it almost since only yesterday with its first commit dating to August 2018.</li>
+</ul>
+
+<p>I think, given some time to it, this project has really good chances. Also, it is gaining popularity really fast. On the other hand, being so fresh also means that online forums are not yet populated with the solution to its most common problems, and a plugin ecosystem did not really have time to evolve. Also, although it is popular, I still think it is a risky choice given its young age.</p>
+
+<p>It builds its foundations upon Vue.js, which I consider one of the most mature projects in the JS word, but we need some patience. I can’t wait to look back again!</p>
+
+<p>Good luck, Gridsome development team! I’m really excited about your project!</p>
+
+<h3 id="why-not-gatsby-then">(why not Gatsby then?)</h3>
+
+<p>Because I did not like the <a href="https://reactjs.org/">React</a> ecosystem :P I’ve experienced a steep learning curve, it was really hard <em>for me</em> to judge where to put when and what to keep my codebase maintainable. It did not hide those details that I specifically do not want to hassle about. (but note that it is only specific to <em>my</em> use case!)</p>
+
+<p>I think that I am not mature enough for React and Gatsby yet.</p>
+
+<blockquote>
+  <p>Even if I’m a big fan of Arch Linux, I probably would not recommend it for someone who just wants to see something working, without diving deep into the details.</p>
+</blockquote>
+
+<h2 id="hexo">Hexo</h2>
+
+<p>The development of <a href="https://hexo.io/">Hexo</a> has started in 2012 and released 1.0.0 in March 2013. Its current version is at 4.2.0, and with all that in mind, it is the most mature one of my options so far.</p>
+
+<p>It was a pleasant experience to get started as it worked right out of the box. It has a default theme that shows you the full capability of the tool, whereas Hugo did not have one… but they at least recommended one in the documentation.</p>
+
+<p>Hexo supports layouts, partials (includes/widgets) and data files. It also focuses on blogging and has pagination included. Also, some helper scripts allow you to quickly scaffold your site. A quick build time is promised as well (even a hundred of pages per second).</p>
+
+<p>It seems like it has all the features I need. I probably wouldn’t regret if I chose that.</p>
+
+<p>In the end, I have chosen Jekyll instead.</p>
+
+<h2 id="jekyll">Jekyll</h2>
+
+<p><a href="https://jekyllrb.com/">Jekyll</a> is even older than all the sites generators mentioned above, it has appeared in GitHub in 2008 - nonetheless it reached version 1.0.0 in 2013 - and version 4.0.0 just has been released. It is actively maintained and features more or less the same capabilities as Hexo. Jekyll and Hexo both look modern and clean to me, not suffering from legacy code problems (or I was not looking enough).</p>
+
+<ul>
+  <li>It has layouts &amp; includes</li>
+  <li>It supports templating from data files</li>
+  <li>It has a past and a high popularity since then (the second most popular after Hugo, according to GitHub stars) – probably I could count on plugins and online questions on common problems</li>
+</ul>
+
+<p>I would say, that among these options, Jekyll and Hexo are the most decent options for my project.</p>
+
+<p>If there is one thing that I particularly like about Jekyll, it is that you do not need to generate a starter boilerplate to begin building (to clarify myself, the prior ones probably did not need a skeleton project either, I just did not really found documentation on that). First you may just have a markdown file and you can start using the features you need one by one. Lovely! I only spend time to learn those parts of Jekyll that I am particularly interested in! But don’t worry, it has a starter boilerplate generator tool if you wish to use that.</p>
+
+<p>I have chosen Jekyll and I am satisfied with it since. Hexo probably could have been a great choice for me too. I preferred Jekyll for two things:</p>
+<ul>
+  <li>It is older, therefore I expect more community support, plugins and documentation.</li>
+  <li>A Jekyll site can be built up from scratch.</li>
+</ul>
+
+<h1 id="will-any-of-the-above-satisfy-you">Will any of the above satisfy you?</h1>
+
+<p>The answer to this question is the usual: it depends. I strongly recommend you once again to enumerate your specific requirements first on what tool are you looking for, and then start experimenting and searching.</p>
+
+<p>Remember: you choose tools for yourself, nobody else cares whether you used <a href="https://en.wikipedia.org/wiki/Editor_war">Vim or Emacs</a> to build your site ;)</p>
+
+<p>Good luck, and thanks for reading!</p>
+
+<p><img src="/assets/img/2020-01-23-choosing-a-static-site-generator/pixabay-tools-2145770_960_720.jpg" alt="tools" /></p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">Getting ready for blogging!</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

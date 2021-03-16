@@ -1,0 +1,402 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,min-width=320">
+  
+  
+    <title>On Linux Network Interfaces and Virtual Bridges | Kuklin István Alexander</title>  
+  
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/clamp-js@0.7.0/clamp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ResizeSensor.min.js" integrity="sha256-Kd3cF9+M1hD23aNZ4BEMvp+Hj9wAT8RQlTnd0Fv3wCs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.2/ElementQueries.min.js" integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+  <div class="layout-base-wrapper">
+    <div class="layout-sidebared-wrapper">
+  <div class="for-large-screens">
+    <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="get-out-behind-sidebar">
+    <div class="main-area">
+        <div class="header-wrapper">
+          <script src="/assets/js/scroll_to_first_visible.js"></script>
+
+<script> 
+
+function getRandomSlogan() {
+    const slogans = [
+        "Exploring technology",
+        "Works on my machine",
+        "#define NULL (::rand() % 2)",
+        "// temporary solution",
+        "Free code!",
+        "Sent from _your_ iPhone",
+        "/* I did this the other way */",
+        "It would be cool if-",
+        "Making the pattern of lights good",
+        "Googling at its finest",
+        "Blockchain and AI-free (as of yet)",
+        "Hey! A visitor! No, don't run!",
+        "Beyond jeopardizing missions",
+        "Resume driven development",
+        "To exit vim, type :q<br>You're welcome!",
+        "Starting then abandoning projects",
+        "Yet another xkcd-fan"
+    ];
+
+    let random = Math.floor(Math.random() * slogans.length);
+    return slogans[random]
+}
+
+function placeRandomSlogan() {
+    document.getElementById("slogan").innerHTML=getRandomSlogan()
+}
+</script>
+
+<div class="header-wrapper">
+    <a href="javascript:void(0);" onclick="scroll_to_first_visible('.menu');" title="Show menu">
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/img/ki_green.png" alt="logo">
+            </div>    
+            <div class="texts">   
+                <strong class="header-title">Kuklin István Alexander</strong>
+                <span class="slogan" id="slogan" onclick="placeRandomSlogan()">Exploring technology</span>
+            </div>
+        </header>
+    </a>
+</div>
+
+<script>
+    placeRandomSlogan()
+</script>
+        </div>
+        
+        <div class="layout-default-wrapper">
+  <div class="content-wrapper">
+    <div class="content stretch-on-mobile"  >
+        <div class="layout-post-wrapper">
+    <div class="md-stretch">
+        <div class="headline-wrapper">
+    <div class="headline">
+        <div class="row">
+            <div class="headlines">
+                <h2>On Linux Network Interfaces and Virtual Bridges</h2>
+                <h4>31 August 2020</h4>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    ElementQueries.init();
+</script>
+    </div>
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+                
+                
+                
+
+
+<div class="series-box-wrapper">
+    <div class="series-box" id="series-box-anchor">
+        <div class="series-title-container">
+            <p class="series-title">Series: <span style="display: inline-block">Linux Networking</span></p>
+        </div>
+        
+        <ul>
+            
+                
+                            
+                 
+                    <li class="current">
+                
+                    <a href="/2020/08/31/on-linux-network-interfaces-and-virtual-bridges.html">Part 1: On Linux Network Interfaces and Virtual Bridges</a>
+                </li>
+            
+                
+                            
+                
+                    <li>
+                
+                    <a href="/2020/09/04/creating-a-unified-virtual-lan.html">Part 2: Creating a Unified Virtual LAN</a>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+            
+        
+            
+        
+    
+
+    <article>
+        <p>Suppose you have some virtual machines in a host-only network governed by VirtualBox referenced with the interface <code class="highlighter-rouge">vboxnet0</code> and also some individual Docker containers in their own default network domain, referenced with <code class="highlighter-rouge">docker0</code>.  Let there be also a QEMU machine with an unhooked interface.</p>
+
+<p>Linux-based operating systems, in my experience, are praised for their network capabilities. With that in mind, it shouldn’t be too hard to “put these devices under a virtual LAN”, should it be?</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-start.png" /></p>
+
+<p>Could we create a unified virtual network - preferably with an internet connection - in a setting similar to our typical home LAN network setup? Or maybe this action does not make sense at all?</p>
+
+<p>This is the topic that I would like to share my experience on with you.</p>
+
+<h2 id="understanding-the-concepts">Understanding the concepts</h2>
+
+<p>But what is <em>exactly</em> a network interface? What is the difference between a switch and a router? What is a network bridge? And can I emulate all these ton of devices virtually?</p>
+
+<h3 id="linux-network-interface">Linux Network interface</h3>
+
+<p>A Linux network interface is an OS-level abstraction for a network connection - it encapsulates the concepts of the OSI layers 2 (data link) and 3 (network). I emphasize the phrase <em>abstraction</em>. It is a “thing”, that you can send packets to, assign an IP address to, set it up or down, route, create firewall rules for, and so on. It is also visible to your applications, such as your browser or a server you run.</p>
+
+<p>It is usually backed by either a physical Network Interface Card / NIC (OSI level 1) or in some cases a special software. Typically, a program that creates a network interface for you is some virtualization solution that features network isolation - the appearing new network interface in your host OS is your link to the created virtual network. You can also think of these links as the “virtual cable endings” in your OS, whether there is a physical device or some software on the other end.</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-linux_interfaces.png" /></p>
+
+<p>Note, that a virtualization solution that creates virtual networks is not forced to give you a link - consider the <a href="https://www.virtualbox.org/manual/ch06.html#network_internal">internal networking mode</a> of VirtualBox. In this scenario, VirtualBox emulates a network bridge for the machines, but it does not connect the host operating systems to this bridge - that is, no new interface is going to appear and you cannot reach the virtual machines from this direction.</p>
+
+<h3 id="hubs-network-bridges-and-switches">Hubs, network bridges and switches</h3>
+
+<p>Before understanding the virtual bridges, let me start with the classical concepts. There are multiple ways to connect computers in a way they can communicate with each other.</p>
+
+<h4 id="hubs-and-bridges">Hubs and bridges</h4>
+
+<p>One of the simplest solutions is using a hub, which is basically a “broadcast box”. All machines that are plugged into the hub receive all the network packets of their neighbors. While it has some negative security-related implications, it can also put a burden on all the connections as every computer receives messages that aren’t actually their business. It can quickly become noisy - like when a lot of people argue in crowded place.</p>
+
+<p>To my best knowledge, they are not widely used anymore.</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-hubs.png" style="width: 800px;" /></p>
+
+<p>As the network grows, we can install some bridges here and there to lower traffic and increase security.</p>
+
+<p>A classical bridge has only two ports, but it can decide whether the message it receives on one port should travel to the other side or should get dropped - therefore, messages from two segments only pass through if they are meant to.</p>
+
+<h4 id="switches">Switches</h4>
+
+<p>A classical switch is virtually a network bridge with more ports - it can also be thought of as a “smart hub”. Instead of broadcasting all communication to all of its ports, it delivers the packets only to its correct destination. It can operate on either the data link layer (L2) or on the network layer (L3).</p>
+
+<h4 id="routers">Routers</h4>
+
+<p>A router is used to forward packets from one network to the other without combining the network segments. It has a routing table that decides which packets are forwarded to what interfaces. Usually it has a firewall and does something called <a href="https://en.wikipedia.org/wiki/Network_address_translation">Network Address Translation or NAT for short</a>, a technique, which, amongst others, enables a household to have multiple machines connected to the Internet with one (external) IP address.</p>
+
+<blockquote>
+  <p>That box with the flashing lights on the shelf that we call a “WiFi router” is not only a network router (that forwards data from the WAN and the LAN network), but also an ethernet switch, a wireless access point (a “wireless hub”, more or less) and a bridge that connects the broadcast domain of the LAN ethernet interfaces and the clients of the wireless access points.</p>
+</blockquote>
+
+<h3 id="virtual-bridges">Virtual bridges</h3>
+
+<p>In Linux, a virtual bridge is the analogous device for a switch. You can “plug” into it an arbitrary number of other interfaces and it will optionally provide your OS another link (br0 in the figure). If you want to access the newly created, combined network, then you can do so by assigning this interface an IP address - now you’re connected to the network that bridge creates. Although these new bridge links cannot be plugged into other virtual bridges again, the virtual bridges can be connected using virtual ethernet pairs (veth pairs).</p>
+
+<p><img src="/assets/img/network/bridging/bridging_1-bridges.png" style="width: 600px;" /></p>
+
+<h3 id="virtual-ethernet-pair">Virtual ethernet pair</h3>
+
+<p>In Linux, a virtual ethernet pair or VETH pair is a virtual network device that gives you two links into the OS. The packets sent into one appear in the other end. You can think of it as a virtual patch cable. It is usually used to connect isolated network namespaces in Linux, but we are also going to use them now to connect multiple bridges to form a single virtual network.</p>
+
+<h3 id="linux-network-namespace">Linux network namespace</h3>
+
+<p>Last but not least - we have network namespaces. Keeping it short for this time, a network namespace in Linux enables you to have multiple network stacks on the same machine creating running virtual machines.  By different network stack I primarily mean the set of visible network interfaces, the routing table and the IPTables firewall rules. In Linux, container technologies such as Docker makes heavy use of this kernel feature.</p>
+
+<p>We are going to use a namespace for forwarding packets between our virtual appliances and the interface of the physical network card.</p>
+
+<h2 id="the-final-goal">The final goal</h2>
+
+<p>With all that in mind, our final stop is to create this network in a testing environment. It is a unified “LAN” network for the virtual machines with Internet access.</p>
+
+<ol>
+  <li>We are going to combine (bridge) the three networks so that the appliances can reach each other</li>
+  <li>We are going to provide an Internet connection in a similar way a “household” router device does (the physical full-featured device)</li>
+</ol>
+
+<p><img src="/assets/img/network/bridging/bridging_1-goal.png" /></p>
+
+<p>In the next episode we are going to create this network with example machines and containers.</p>
+
+    </article>
+
+     
+        <div class="series_notification">
+            <a href="#series-box-anchor">    
+                This article is part of the series:
+                <span style="display: inline-block">Linux Networking</span>
+            </a>
+        </div>
+    
+
+</div>
+    </div>
+</div>
+</div>
+
+    </div>
+    <div class="for-small-screens">
+      <div class="sidebar-wrapper">
+    <div class="side-area">
+        <div class="logo-container">
+            <img src="/assets/img/ki_green.png" alt="logo" width=70px class="logo" />
+        </div>
+        <div class="text">
+            <div class="slogan">
+                Blog & Sharing Vault
+            </div>
+            <div class="menu">
+                <ul>
+                    
+                    <a href="/"><li>About</li></a>
+                    
+                    <a href="/posts/"><li>Recent articles</li></a>
+                    
+                    <a href="/search/"><li>Find content</li></a>
+                    
+                    <a href="/contributions/"><li>Contributions</li></a>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socmedia-icons">
+                <a href="mailto:istvan@codekuklin.com">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/envelope-solid.svg">
+</div>
+                </a>
+                <a href="https://github.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/github-brands.svg">
+</div>
+                </a>
+                <a href="https://facebook.com/kuklinistvan">
+                    <div class="icon-wrapper">
+    <img class="icon" alt="Icon" src="/assets/img/icons/facebook-brands.svg">
+</div>
+                </a>
+            </div>
+            <span class="legal">
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander</span><br/> All rights reserved</p> -->
+                <!-- <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> All rights reserved.</p> -->
+                <p>&copy; 2020 <span class="avoidwrap">Kuklin István Alexander.</span> <span class="avoidwrap">All rights reserved.</span></p>
+                <p><a href="/legal.html">Legal acknowledgements...</a></p>
+            </span>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+  </div>
+</body>
+
+<script>
+  // external linkekhez _target=blank
+
+  var links = document.links;
+  for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+    // can also be
+    //  links[i].hostname != 'subdomain.example.com'
+    console.log(links[i].hostname)
+    if (links[i].hostname != window.location.hostname && links[i].hostname != "") {
+      links[i].target = '_blank';
+      links[i].className += ' externalLink';
+    }
+  }
+</script>
+
+
+</html>

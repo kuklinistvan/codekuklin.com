@@ -1,0 +1,3 @@
+[console_scripts]
+codekuklin.com-auto_boilerplate = auto_boilerplate.skeleton:run
+
